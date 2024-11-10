@@ -62,7 +62,7 @@ obsidian_vault
 !.gitignore
 !.gitconfig
 !.gitattributes
-
+hosts.yml
 # WAYBAR
 !.config/waybar
 !.config/waybar/config.jsonc
