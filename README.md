@@ -18,7 +18,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 lua rocks
 foe fedora
 ```fish
-sudo dnf install lua lua-devel luarocka
+sudo dnf install lua lua-devel luarocks go lua5.1
 ```
 ```fish
 wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
