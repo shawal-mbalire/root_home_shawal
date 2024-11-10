@@ -39,7 +39,6 @@ obsidian_vault
 !.config/nvim/lua/shawal/*.lua
 !.config/nvim/lua/shawal/lazy/**.lua
 !.config/nvim/plugin/*.lua
-!.config/nvim/lua/shawal/lazy/neotest.lua
 
 !.config/obsidian
 .config/*
