@@ -63,4 +63,8 @@ obsidian_vault
 !.gitconfig
 !.gitattributes
 
-DockerContainer/
+# WAYBAR
+!.config/waybar
+!.config/waybar/config.jsonc
+!.config/waybar/style.css
+
