@@ -1,22 +1,26 @@
-# homelinux
+# My Linux Configuration.
+
+
+## Accepting this configuratoin on a new install
+
+```fish
+git clone https://github.com/shawal-mbalire/root_home_shawal
+rsync -avhu --progress root_home_shawal ~
+```
 
  ## hyprland
 
  ```
-yay -Syyu hyprland-git
-```
-
-```
-yay -Syyu wofi drun
+yay -Syyu hyprland-git wofi drun
 ```
 
 ## Nvim packer
-```bash
+```fish
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
-lua rocks
-foe fedora
+
+for fedora
 ```fish
 sudo dnf install lua lua-devel luarocks go lua5.1
 ```
