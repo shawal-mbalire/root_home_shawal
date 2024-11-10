@@ -9,6 +9,7 @@ obsidian_vault
 !.config/fish/config.fish
 
 # HYPRLAND
+!wallpaper.jpg
 !.config/hypr
 !.config/hypr/hyprland.conf
 !.config/hypr/hyprpaper.conf
