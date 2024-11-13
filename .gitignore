@@ -18,11 +18,6 @@ obsidian_vault
 !.config/fastfetch
 !.config/fastfetch/config.jsonc
 
-# GITHUB CLI TOOL
-!.config/gh
-!.config/gh/config.yml
-!.config/gh/hosts.yml
-
 # KITTY
 !.config/kitty
 !.config/kitty/kitty.conf
