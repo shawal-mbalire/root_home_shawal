@@ -63,3 +63,6 @@ obsidian_vault
 !.config/waybar/config.jsonc
 !.config/waybar/style.css
 
+# open-webui
+!.confg/open-webui
+!.config/open-webui/docker-compose.yml
