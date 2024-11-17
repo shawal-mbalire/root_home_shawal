@@ -74,3 +74,7 @@ obsidian_vault
 # fastfetch
 !.config/fastfetch
 !.config/fastfetch/config.jsonc
+
+# rofi
+!.config/rofi
+!.config/rofi/config.rasi

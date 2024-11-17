@@ -3,6 +3,7 @@ if status is-interactive
     set fish_greeting ''
     fastfetch
     fish_vi_key_bindings insert
+    fish_config prompt choose "nim"
     # Emulates vim's cursor shape behavior
     # Set the normal and visual mode cursors to a block
     set fish_cursor_default block
