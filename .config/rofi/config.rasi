@@ -1,0 +1,24 @@
+configuration {
+    show-icons: true;
+    modi: "window,drun,ssh,combi";
+    font: "comfortaa 15";
+    combi-modi: "window,drun,ssh";
+}
+@theme "solarized"
+
+element-icon { size: 1.65ch ; }
+
+window {
+    width:                        450px;
+    x-offset:                     0px;
+    y-offset:                     0px;
+    spacing:                      0px;
+    padding:                      20px;
+    margin:                       0px;
+    cursor:                       "default";
+    transparency:                 "real";
+    location:                     center;
+    anchor:                       center;
+    enabled:                      true;
+    border-radius:                10px;
+}
