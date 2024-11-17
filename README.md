@@ -49,3 +49,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 ```bash
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
+
+### waybar bluetooth and nmtui support
+
+install blueman and nmtui
+suprisingly this blueman installs sway controlcenter
+if only there was something like this for hyprland instead of different prgrams
