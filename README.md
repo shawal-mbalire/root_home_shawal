@@ -8,6 +8,12 @@ git clone https://github.com/shawal-mbalire/root_home_shawal
 rsync -avhu --progress root_home_shawal ~
 ```
 
+## installing nerdfonts
+
+```bash
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+```
+
  ## hyprland
 
  ```
@@ -32,7 +38,7 @@ cd luarocks-3.11.1
 sudo luarocks install luasocket
 lua
 ```
-## Vim plug 
+## Vim plug
 
 ### vim
 ```bash

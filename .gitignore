@@ -66,3 +66,11 @@ obsidian_vault
 # open-webui
 !.confg/open-webui
 !.config/open-webui/docker-compose.yml
+
+#ags
+!.config/ags
+!.config/ags
+
+# fastfetch
+!.config/fastfetch
+!.config/fastfetch/config.jsonc

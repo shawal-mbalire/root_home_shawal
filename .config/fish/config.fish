@@ -1,6 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set fish_greeting ''
+    fastfetch
     fish_vi_key_bindings insert
     # Emulates vim's cursor shape behavior
     # Set the normal and visual mode cursors to a block
