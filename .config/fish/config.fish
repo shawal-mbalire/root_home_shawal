@@ -19,7 +19,6 @@ if status is-interactive
     # visual mode, but due to fish_cursor_default, is redundant here
     set fish_cursor_visual block
 
-
     abbr --add vi 'nvim'
     abbr --add vim 'nvim'
 end
