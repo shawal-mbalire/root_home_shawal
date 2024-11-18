@@ -41,6 +41,7 @@ cd luarocks-3.11.1
 sudo luarocks install luasocket
 lua
 ```
+on fedora obsidian is a snap
 ## Vim plug
 
 ### vim
