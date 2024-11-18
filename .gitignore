@@ -80,5 +80,6 @@ obsidian_vault
 !.config/rofi/config.rasi
 
 # open-webui
+!.config/open-webui
 !.config/open-webui/docker-compose.yaml
 

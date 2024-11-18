@@ -1,0 +1,15 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:ollama
+    container_name: open-webui
+    ports:
+      - "3000:8080"  # Expose port 8080 internally to 3000 externally
+    volumes:
+      - ollama:/root/.ollama  # Persistent storage for Ollama data
+      - open-webui:/app/backend/data  # Persistent storage for app data
+    restart: always  # Restart policy (equivalent to --restart always)
+
+volumes:
+  ollama:  # Named volume for Ollama data
+  open-webui:  # Named volume for the application data
+
