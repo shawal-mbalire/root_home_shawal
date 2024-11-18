@@ -9,7 +9,10 @@ rsync -avhu --progress root_home_shawal ~
 ```
 
 ## installing nerdfonts
-
+on arch 
+```fish
+yay -S nerd-fonts
+```
 ```bash
 curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
 ```
