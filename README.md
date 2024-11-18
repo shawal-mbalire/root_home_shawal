@@ -2,7 +2,10 @@
 
 
 ## Accepting this configuratoin on a new install
-
+ ## checking file usage
+ ``` fish
+du --all --human-readable --threshold 1G
+```
 ```fish
 git clone https://github.com/shawal-mbalire/root_home_shawal
 rsync -avhu --progress root_home_shawal ~
