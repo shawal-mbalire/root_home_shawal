@@ -11,8 +11,9 @@ rsync -avhu --progress root_home_shawal ~
 ## installing nerdfonts
 on arch 
 ```fish
-yay -S nerd-fonts
+yay -S nerd-fonts otf-font-awesome
 ```
+install otf-font-awesome on fedora.. don't know when it was installed
 ```bash
 curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
 ```
