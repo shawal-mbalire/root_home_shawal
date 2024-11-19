@@ -1,7 +1,6 @@
 require("config.set")
 require("config.remap")
 require("config.lazy")
-require("config.dot")
 
 local augroup = vim.api.nvim_create_augroup
 local ShawalGroup = augroup('Shawal', {})
