@@ -11,9 +11,9 @@
         "hyprland/submap",
         "hyprland/scratchpad"
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    //"modules-center": [
+        //"hyprland/window"
+    //],
     "modules-right": [
         // "idle_inhibitor",
         "pulseaudio",
