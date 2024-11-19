@@ -1,6 +1,7 @@
 require("shawal.set")
 require("shawal.remap")
 require("shawal.lazy_init")
+require("shawal.dot")
 
 -- DO.not
 -- DO NOT INCLUDE THIS

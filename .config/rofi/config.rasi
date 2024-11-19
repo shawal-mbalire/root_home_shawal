@@ -1,10 +1,12 @@
+*{
+    background: transparent;
+}
 configuration {
     show-icons: true;
     modi: "window,drun,ssh,combi";
     font: "comfortaa 15";
     combi-modi: "window,drun,ssh";
 }
-@theme "purple"
 
 element-icon { size: 1.65ch ; }
 
@@ -16,9 +18,13 @@ window {
     padding:                      20px;
     margin:                       0px;
     cursor:                       "default";
-    transparency:                 "real";
+    transparency:                 "screenshot";
     location:                     center;
     anchor:                       center;
     enabled:                      true;
     border-radius:                10px;
+}
+element-text,
+element-icon {
+    background-color: transparent;
 }
