@@ -19,7 +19,6 @@ return {
         view = {
             width = 30,
             side = "right",
-            border = "rounded"
         },
         renderer = {
             group_empty = true,

@@ -24,17 +24,11 @@ obsidian_vault
 
 # NEOVIM
 !.config/nvim
-!.config/nvim/lua
-!.config/nvim/after
+!.config/nvim/config
+!.config/nvim/plugins
+!.config/nvim/config/*.lua
+!.config/nvim/plugins/*.lua
 !.config/nvim/*.lua
-!.config/nvim/plugin
-!.config/nvim/after/plugin
-!.config/nvim/lua/shawal
-!.config/nvim/lua/shawal/lazy
-!.config/nvim/after/plugin/*.lua
-!.config/nvim/lua/shawal/*.lua
-!.config/nvim/lua/shawal/lazy/**.lua
-!.config/nvim/plugin/*.lua
 
 !.config/obsidian
 .config/*
