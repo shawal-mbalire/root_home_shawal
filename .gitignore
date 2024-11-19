@@ -78,6 +78,8 @@ obsidian_vault
 # rofi
 !.config/rofi
 !.config/rofi/config.rasi
+!.config/rofi/themes
+!.config/rofi/themes/*.rasi
 
 # open-webui
 !.config/open-webui

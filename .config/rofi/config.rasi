@@ -4,7 +4,7 @@ configuration {
     font: "comfortaa 15";
     combi-modi: "window,drun,ssh";
 }
-@theme "solarized"
+@theme "purple"
 
 element-icon { size: 1.65ch ; }
 
