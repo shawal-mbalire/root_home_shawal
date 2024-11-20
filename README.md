@@ -14,7 +14,12 @@ rsync -avhu --progress root_home_shawal ~
 ## installing nerdfonts
 on arch 
 ```fish
-yay -S nerd-fonts otf-font-awesome
+yay -S ttf-hack-nerd
+```
+on fedora
+```fish
+sudo dnf copr enable zawertun/hack-fonts
+sudo dnf install hack-fonts
 ```
 install otf-font-awesome on fedora.. don't know when it was installed
 ```bash
