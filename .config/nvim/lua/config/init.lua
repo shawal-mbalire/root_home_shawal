@@ -18,6 +18,17 @@ vim.filetype.add({
     }
 })
 
+vim.filetype.add({
+    extension = {
+    conf = "ruby",
+    },
+})
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.conf",
+    command = "set filetype=ruby",
+})
+
+
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
