@@ -22,7 +22,7 @@ vim.opt.encoding = "utf-8"               -- Set encoding to UTF-8
 vim.opt.fileencoding = "utf-8"           -- Set file encoding to UTF-8
 vim.opt.fileencodings = "utf-8"          -- Fallback encodings
 vim.opt.ttyfast = true                   -- Faster rendering for better performance
-vim.opt.mouse = ""     
+vim.opt.mouse = ""
 
 vim.opt.wildmenu = true                  -- Visual autocomplete for command menu
 vim.opt.lazyredraw = true                -- Redraw screen only when needed
