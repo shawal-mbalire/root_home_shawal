@@ -20,12 +20,12 @@ vim.filetype.add({
 
 vim.filetype.add({
     extension = {
-    conf = "ruby",
+    conf = "bash",
     },
 })
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     pattern = "*.conf",
-    command = "set filetype=ruby",
+    command = "set filetype=bash",
 })
 
 
