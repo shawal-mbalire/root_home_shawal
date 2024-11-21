@@ -26,8 +26,8 @@
         // "hyprland/language",
         "battery",
         "bluetooth",
-        "clock"
-        // "tray"
+        "clock",
+         "tray"
     ],
     // Modules configuration
     "bluetooth": {
@@ -174,7 +174,7 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "on-click": "alacritty -e nmtui",
+        //"on-click": "alacritty -e nmtui",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
