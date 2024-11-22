@@ -3,3 +3,16 @@ window.startup_mode = "Maximized"
 window.decorations = "None"
 window.padding = { x=10, y=10}
 
+[font]
+normal = { family = "sono", style="semibold"}
+bold   = { family = "sono", style="extrabold"}
+
+size =12
+glyph_offset={x=0,y=0}
+builtin_box_drawing=false
+offset={x=-1,y=0}
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]

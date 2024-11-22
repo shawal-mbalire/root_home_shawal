@@ -1,7 +1,0 @@
-configuration{
-}@import "config"
-
-window {
-    location: northeast;
-    anchor: northeast;
-}

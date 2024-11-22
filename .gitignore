@@ -1,7 +1,4 @@
 *
-yay
-obsidian_vault
-
 !.config
 
 # FISH
@@ -74,8 +71,16 @@ obsidian_vault
 !.config/rofi/config.rasi
 !.config/rofi/themes
 !.config/rofi/themes/*.rasi
+!.config/rofi/**
 
 # open-webui
 !.config/open-webui
 !.config/open-webui/docker-compose.yaml
 
+# fonts
+!.local
+!.local/share
+!.local/share/fonts
+!.local/share/fonts/**
+!.local/share/fonts/**/**
+.local/*
