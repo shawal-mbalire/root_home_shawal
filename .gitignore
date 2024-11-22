@@ -84,3 +84,9 @@
 !.local/share/fonts
 !.local/share/fonts/**
 !.local/share/fonts/**/**
+
+# heh
+!.fehbg
+
+# picom
+!.config/picom.conf
