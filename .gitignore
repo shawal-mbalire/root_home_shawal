@@ -78,9 +78,9 @@
 !.config/open-webui/docker-compose.yaml
 
 # fonts
+.local/*
 !.local
 !.local/share
 !.local/share/fonts
 !.local/share/fonts/**
 !.local/share/fonts/**/**
-.local/*
