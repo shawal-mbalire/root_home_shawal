@@ -32,7 +32,7 @@
 
 # XMONAD
 !.xmonad
-!.xmonad/xmonad.hs
+!.xmonad/**.hs
 
 # OTHER FILES
 !.vimrc
