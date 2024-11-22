@@ -1,5 +1,13 @@
 # Fedora ricing
 
+## remove
+```fish
+sudo dnf install hyprland sddm
+sudo dnf remove gnome-shell --setopt protected_packages=
+```
+```bash
+sudo dnf remove gnome-** plasma-** kde-**
+```
 ## Rawhide 
 changing to raw hide gives you a more rolling release distro giving you the latest fixes and patches
 ```fish
