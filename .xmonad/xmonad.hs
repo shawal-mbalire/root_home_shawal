@@ -266,7 +266,8 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = ,spacingRaw True (Border 0 10 10 10) True (Border 10 10 10 10) True
+           $ myLayout
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
