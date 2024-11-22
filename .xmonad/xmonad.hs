@@ -5,11 +5,104 @@ import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+    -- Hooks
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
+import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doCenterFloat)
+import XMonad.Hooks.ServerMode
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.WindowSwallowing
+import XMonad.Hooks.WorkspaceHistory
+
+    -- Layouts
+import XMonad.Layout.Accordion
+import XMonad.Layout.GridVariants (Grid(Grid))
+import XMonad.Layout.SimplestFloat
+import XMonad.Layout.Spiral
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Tabbed
+import XMonad.Layout.ThreeColumns
+
+    -- Layouts modifiers
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
+import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
+import XMonad.Layout.ShowWName
+import XMonad.Layout.Simplest
+import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
+import XMonad.Layout.WindowNavigation
+import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
+import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
+
+   -- Utilities
+import XMonad.Util.Dmenu
+import XMonad.Util.EZConfig (additionalKeysP, mkNamedKeymap)
+import XMonad.Util.Hacks (windowedFullscreenFixEventHook, javaHack, trayerAboveXmobarEventHook, trayAbovePanelEventHook, trayerPaddingXmobarEventHook, trayPaddingXmobarEventHook, trayPaddingEventHook)
+import XMonad.Util.NamedActions
+import XMonad.Util.NamedScratchpad
+import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Util.SpawnOnce
+
+   -- ColorScheme module (SET ONLY ONE!)
+      -- Possible choice are:
+      -- DoomOne
+      -- Dracula
+      -- GruvboxDark
+      -- MonokaiPro
+      -- Nord
+      -- OceanicNext
+      -- Palenight
+      -- SolarizedDark
+      -- SolarizedLight
+      -- TomorrowNight
+import Colors.DoomOne
+
+-- Base
+import XMonad
+import System.Directory
+import System.IO (hClose, hPutStr, hPutStrLn)
+import System.Exit (exitSuccess)
+import qualified XMonad.StackSet as W
+    -- Actions
+import XMonad.Actions.CopyWindow (kill1)
+import XMonad.Actions.CycleWS (Direction1D(..), moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
+import XMonad.Actions.GridSelect
+import XMonad.Actions.MouseResize
+import XMonad.Actions.Promote
+import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
+import XMonad.Actions.WindowGo (runOrRaise)
+import XMonad.Actions.WithAll (sinkAll, killAll)
+import qualified XMonad.Actions.Search as S
+    -- Data
+import Data.Char (isSpace, toUpper)
+import Data.Maybe (fromJust)
+
+-- Theme for showWName which prints current workspace when you change workspaces.
+-- myShowWNameTheme :: SWNConfig
+-- myShowWNameTheme = def
+--   { swn_font              = "xft:Ubuntu:bold:size=60"
+--     , swn_fade              = 1.0
+--       , swn_bgcolor           = "#1c1f24"
+--         , swn_color             = "#ffffff"
+--           }
+--           import Data.Monoid
+import Data.Maybe (isJust)
+import Data.Tree
+import qualified Data.Map as M
+
+
 -- One line options
-myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-myClickJustFocuses :: Bool
 myClickJustFocuses = False
+myFont = "sono:regular:size=9:antialias=true:hinting=true"
 myTerminal      = "alacritty"
 myBorderWidth   = 2
 myModMask       = mod1Mask
@@ -21,7 +114,7 @@ myFocusedBorderColor = "#00ff00"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 [
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "rofi -show drun")
     , ((modm .|. shiftMask, xK_p     ), spawn "google-chrome-stable")
     , ((modm .|. shiftMask, xK_i     ), spawn "code-insiders")
     , ((modm .|. shiftMask, xK_t     ), spawn "nautilus")
@@ -52,7 +145,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-
+-- mouse bindings
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -61,13 +154,39 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                 >> windows W.shiftMaster))
 
+-- spacing
+--Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+
+-- Theme for showWName which prints current workspace when you change workspaces.
+myShowWNameTheme :: SWNConfig
+myShowWNameTheme = def
+  { swn_font              = "xft:Ubuntu:bold:size=60"
+  , swn_fade              = 1.0
+  , swn_bgcolor           = "#1c1f24"
+  , swn_color             = "#ffffff"
+  }
+
+
 -- Layout
-myLayout = tiled ||| Mirror tiled ||| Full
-    where
-    tiled   = Tall nmaster delta ratio
-    nmaster = 1
-    ratio   = 1/2
-    delta   = 3/100
+myLayoutHook = avoidStruts
+$ mouseResize
+$ windowArrange
+$ T.toggleLayouts floats
+$ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
+where
+myDefaultLayout = withBorder myBorderWidth tall
+||| noBorders monocle
+||| floats
+||| noBorders tabs
+||| grid
+||| spirals
+||| threeCol
+||| threeRow
+||| tallAccordion
+||| wideAccordion
+
 
 -- manage hook
 myManageHook = composeAll
@@ -79,7 +198,14 @@ myManageHook = composeAll
 -- unset hooks
 myEventHook   = mempty
 myLogHook     = return ()
-myStartupHook = return ()
+
+-- startup
+myStartupHook :: X ()
+myStartupHook = do
+  spawnOnce "nitrogen --restore"
+  spawnOnce "picom -f"
+  spawnOnce "feh --bg-scale /home/shawal/wallpaper.jpg"
+  spawnOnce "bash .screenlayout/arandr.sh"
 
 -- define main xmonad object
 main = xmonad defaults
@@ -94,7 +220,7 @@ main = xmonad defaults
         focusedBorderColor = myFocusedBorderColor,
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
-        layoutHook         = spacingRaw True (Border 0 10 10 10) True (Border 10 10 10 10) True $myLayout,
+        layoutHook         = showWName' myShowWNameTheme $ myLayoutHook
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
