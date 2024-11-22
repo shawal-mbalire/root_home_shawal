@@ -17,7 +17,7 @@ sudo dnf config-manager setopt rpmfusion-free-updates.enabled=0
 sudo dnf config-manager setopt rpmfusion-free-updates-debuginfo.enabled=0
 sudo dnf config-manager setopt rpmfusion-free-updates-source.enabled=0
 sudo dnf config-manager setopt rpmfusion-free-updates-testing.enabled=0
-sudo dnf config-manager setopt repository.rpmfusion-nonfree-updates-testing=0
+sudo dnf config-manager setopt rpmfusion-nonfree-updates-testing.enabled=0
 ```
 ```fish
 sudo dnf system-upgrade download --releasever=rawhide
