@@ -131,14 +131,14 @@ myStartupHook = do
   spawnOnce "notify-log $HOME/.log/notify.log"
   spawn "/usr/bin/emacs --daemon" -- emacs daemon for the emacsclient
 
-  -- We killed any running conky and trayer processes earlier in the autostart, 
+  -- We killed any running conky and trayer processes earlier in the autostart,
   -- so now we sleep for 2 seconds and then restart conky and trayer.
   spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
   spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
   -- Select only =ONE= of the following four ways to set the wallpaper.
-  spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
-  -- spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
+  -- spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
+  spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
   -- spawnOnce "feh --randomize --bg-fill /usr/share/backgrounds/dtos-backgrounds/*"  -- feh set random wallpaper
   -- spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
   setWMName "LG3D"
@@ -519,11 +519,6 @@ myKeys c =
   , ("M-S-c", addName "Kill focused window"    $ kill1)
   , ("M-S-a", addName "Kill all windows on WS" $ killAll)
   , ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "~/.local/bin/dm-run"])
-<<<<<<< HEAD
-  --, ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "emacsclient -cF '((visibility . nil))' -e '(emacs-run-launcher)'"])
-=======
-  -- , ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "emacsclient -cF '((visibility . nil))' -e '(emacs-run-launcher)'"])
->>>>>>> 46223b7f1772cc858e968592611dbfca23f99e85
   , ("M-S-b", addName "Toggle bar show/hide"   $ sendMessage ToggleStruts)
   , ("M-/", addName "DTOS Help"                $ spawn "~/.local/bin/dtos-help")]
 
