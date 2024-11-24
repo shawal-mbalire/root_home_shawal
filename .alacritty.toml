@@ -12,7 +12,7 @@ background="#000000"
 
 [colors.normal]
 black  = "#000000"
-white  = "#000000"
+white  = "#ffffff"
 red    = "#ff0000"
 green  = "#00ff00"
 blue   = "#0000ff"

@@ -1,11 +1,12 @@
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper =
+    helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper =
+    helper = !/usr/bin/gh auth git-credential
 [user]
-	name = shawal-mbalire
-	email = mbalireshawal@gmail.com
+    name = shawal-mbalire
+    email = mbalireshawal@gmail.com
 [http]
-	postBuffer = 1048576000
+    postBuffer = 1048576000
+    version    = HTTP/1

@@ -30,6 +30,7 @@ sudo dnf system-upgrade download --releasever=rawhide
 ## Copr
 ```fish
 sudo copr enable zawertun/hack-fonts
+sudo dnf enable alxhr0/Obsidian
 ```
 
 ## Repo

@@ -4,6 +4,8 @@
 # FISH
 !.config/fish
 !.config/fish/config.fish
+!.config/fish/functions
+!.config/fish/fish_prompt.fish
 
 # HYPRLAND
 !wallpaper.jpg
