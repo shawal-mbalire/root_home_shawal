@@ -1,7 +1,24 @@
-window.opacity = 0.7
-window.startup_mode = "Maximized"
-window.decorations = "None"
-window.padding = { x=10, y=10}
+[window]
+opacity = 0.7
+startup_mode = "Maximized"
+decorations = "None"
+padding = { x=10, y=10}
+blur = true
+decorations_theme_variant = "Dark"
+
+[colors]
+[colors.primary]
+background="#000000"
+
+[colors.normal]
+black  = "#000000"
+white  = "#000000"
+red    = "#ff0000"
+green  = "#00ff00"
+blue   = "#0000ff"
+yellow = "#ffff00"
+cyan   = "#00ffff"
+magenta= "#ff00ff"
 
 [font]
 normal = { family = "sono", style="semibold"}

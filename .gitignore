@@ -85,7 +85,12 @@
 !.local/share/fonts/**
 !.local/share/fonts/**/**
 
-# heh
+# icons
+!.local/share/icons
+!.local/share/icons/BeautySolar
+!.local/share/icons/BeautySolar/*
+
+# feh
 !.fehbg
 
 # picom
