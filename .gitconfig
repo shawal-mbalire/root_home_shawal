@@ -9,4 +9,4 @@
     email = mbalireshawal@gmail.com
 [http]
     postBuffer = 1048576000
-    version    = HTTP/1
+    version    = HTTP/2
