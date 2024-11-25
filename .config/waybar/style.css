@@ -1,12 +1,12 @@
 * {
-    font-family: 'comfortaa', 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
-    /* font-size: 13px; */
+    font-family: 'comfortaa', monospace;
+    font-size: 12px;
+
     border-radius: 10px;
 }
-
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -16,14 +16,14 @@ window#waybar {
 window#waybar.hidden {
     opacity: 0.2;
 }
-/* 
+/*
 window#waybar.empty {
-    background-color: transparent;
+background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+background-color: #FFFFFF;
 }
- */
+*/
 
 window#waybar.termite {
     background-color: #3F3F3F;
@@ -96,7 +96,7 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 #window,
@@ -125,19 +125,19 @@ button:hover {
 
 #battery.charging, #battery.plugged {
     color: #ffffff;
-    background-color: #26A65B;
+    background-color: #00ff00;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+to {
+    background-color: #ffffff;
+    color: #000000;
+}
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
+    background-color: #ff0000;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -187,11 +187,11 @@ label:focus {
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: #0000ff;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    background-color: #ff0000;
 }
 
 #pulseaudio {
@@ -236,7 +236,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: #0000ff;
 }
 
 #tray > .passive {
@@ -303,7 +303,7 @@ label:focus {
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 #privacy {
