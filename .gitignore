@@ -88,9 +88,10 @@
 !.local/share/fonts/**/**
 
 # icons
-!.local/share/icons
-!.local/share/icons/BeautySolar
-!.local/share/icons/BeautySolar/*
+!.local/share/themes
+!.local/share/themes/BeautySolar
+!.local/share/themes/BeautySolar.tar.gz
+!.local/share/themes/BeautySolar/*
 
 # feh
 !.fehbg
