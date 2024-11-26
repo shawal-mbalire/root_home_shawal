@@ -23,11 +23,7 @@
 
 # NEOVIM
 !.config/nvim
-!.config/nvim/config
-!.config/nvim/plugins
-!.config/nvim/config/*.lua
-!.config/nvim/plugins/*.lua
-!.config/nvim/*.lua
+!.config/nvim/**
 
 !.config/obsidian
 .config/*
