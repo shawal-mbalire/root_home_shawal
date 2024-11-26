@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 -- nvim tree keybindings
 vim.keymap.set("n", "<leader>vv", vim.cmd.NvimTreeOpen)
-vim.keymap.set("n", "<leader>qt", vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "<leader>bb", vim.cmd.NvimTreeClose)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -22,13 +22,13 @@ vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 -- end)
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+-- vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+-- vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
 
 -- This is going to get me cancelled
 -- vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -45,28 +45,28 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set(
-    "n",
-    "<leader>ee",
-    "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>ea",
-    "oassert.NoError(err, \"\")<Esc>F\";a"
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>el",
-    "oif err != nil {<CR>}<Esc>O.logger.Error(\"error\", \"error\", err)<Esc>F.;i"
-)
+-- vim.keymap.set(
+--     "n",
+--     "<leader>ee",
+--     "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+-- )
+--
+-- vim.keymap.set(
+--     "n",
+--     "<leader>ea",
+--     "oassert.NoError(err, \"\")<Esc>F\";a"
+-- )
+--
+-- vim.keymap.set(
+--     "n",
+--     "<leader>el",
+--     "oif err != nil {<CR>}<Esc>O.logger.Error(\"error\", \"error\", err)<Esc>F.;i"
+-- )
 
 
 -- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/packer/init.lua<CR>");
 -- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+-- vim.keymap.set("n", "<leader><leader>", function()
+--     vim.cmd("so")
+-- end)

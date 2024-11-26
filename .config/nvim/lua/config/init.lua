@@ -18,15 +18,15 @@ vim.filetype.add({
     }
 })
 
-vim.filetype.add({
-    extension = {
-    conf = "bash",
-    },
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-    pattern = "*.conf",
-    command = "set filetype=bash",
-})
+-- vim.filetype.add({
+--     extension = {
+--     conf = "bash",
+--     },
+-- })
+-- vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+--     pattern = "*.conf",
+--     command = "set filetype=bash",
+-- })
 
 
 autocmd('TextYankPost', {

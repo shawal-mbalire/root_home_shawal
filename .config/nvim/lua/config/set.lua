@@ -59,3 +59,7 @@ vim.opt.history = 1000                   -- Keep a history of commands
 vim.opt.wildmenu = true                  -- Enable autocomplete menu after pressing TAB
 vim.opt.wildmode = {"list", "longest"}   -- Wildmenu behaves similar to Bash completion
 vim.opt.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx"
+
+
+-- clipbaord
+vim.o.clipboard = 'unnamedplus'

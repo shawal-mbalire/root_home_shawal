@@ -7,7 +7,6 @@ return {
         "hrsh7th/cmp-buffer",
         "Fymyte/rasi.vim",
         "hrsh7th/cmp-path",
-        "theRealCarneiro/hyprland-vim-syntax",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
         "L3MON4D3/LuaSnip",
@@ -31,6 +30,9 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
+                "angularls",
+                "cssmodules_ls",
+                "hyprls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
