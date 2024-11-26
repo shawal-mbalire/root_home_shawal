@@ -1,5 +1,7 @@
 if status is-interactive
 
+    set -g -x GTK_THEME 'BreezeDark'
+
     set fish_greeting ''
     fastfetch
     fish_vi_key_bindings insert
