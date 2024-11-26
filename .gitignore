@@ -88,10 +88,12 @@
 !.local/share/fonts/**/**
 
 # icons
+!.local/share/icons
 !.local/share/themes
-!.local/share/themes/BeautySolar
-!.local/share/themes/BeautySolar.tar.gz
-!.local/share/themes/BeautySolar/*
+!.local/share/icons/BeautySolar
+!.local/share/icons/BeautySolar/*
+!.local/share/themes/BreezeDark
+!.local/share/themes/BreezeDark/**
 
 # feh
 !.fehbg
@@ -100,6 +102,7 @@
 !.config/picom.conf
 
 # GTK
+!.gtkrc-2.0
 !.config/gtkrc
 !.config/gtkrc-2.0
 !.config/gtk-2.0
