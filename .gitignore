@@ -108,3 +108,12 @@
 !.config/gtk-2.0/gtkfilechooser.ini
 !.config/gtk-3.0/settings.ini
 !.config/gtk-4.0/settings.ini
+
+# firefox
+!.mozilla
+!.mozilla/user.js
+!.mozilla/User.js
+
+# qute browser
+!.config/qutebrowser
+!.config/qutebrowser/config.py
