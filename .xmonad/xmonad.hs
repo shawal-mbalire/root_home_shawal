@@ -2,6 +2,7 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Layout.Spacing
+import XMonad.Util.SpawnOnce (spawnOnce)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -55,7 +56,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "rofi -show drun -theme launchers/gridmenu")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "google-chrome-stable")
@@ -180,7 +181,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayoutHook = tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -242,7 +243,20 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+myStartupHook :: X()
+myStartupHook = do
+    spawnOnce "picom -f &"
+    spawnOnce "amixer set Master playback 100% &"
+    spawnOnce "feh --bg-scale /home/shawal/wallpaper.jpg &"
+    spawnOnce "xmodmap -e \"keycode 66 = Escape\""
+    spawnOnce "xmodmap -e \"keycode 9  = Caps_Lock\""
+    spawnOnce "xmodmap -e \"clear Lock\""
+    spawnOnce "bash .screenlayout/arandr.sh"
+    -- turn off Display Power Management Service (DPMS)
+    spawnOnce "xset -dpms"
+    spawnOnce "setterm -blank 0 -powerdown 0"
+    -- turn off black Screensaver
+    spawnOnce "xset s off"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -273,7 +287,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = spacingWithEdge 5 $ myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
