@@ -31,6 +31,7 @@
 # XMONAD
 !.xmonad
 !.xmonad/**.hs
+!.xmobarrc
 
 # OTHER FILES
 !.vimrc
