@@ -8,7 +8,7 @@ import XMonad.Hooks.EwmhDesktops
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Hooks.InsertPosition (insertPosition, Focus(Newer), Position(End))
-import XMonad.Hooks.ManageDocks
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -81,8 +81,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
      delta   = 3/100
 
 myManageHook = composeAll
-    [ManageDocks.manageDocks
-    ,insertPosition End Newer
+    [insertPosition End Newer
     ,className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
