@@ -1,8 +1,11 @@
 import XMonad
-import Data.Monoid
 import System.Exit
-import XMonad.Hooks.EwmhDesktops
+import Data.Monoid
 import XMonad.Layout.Spacing
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
+import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 import qualified XMonad.StackSet as W
@@ -23,32 +26,36 @@ myTextEditor         = "alacritty nvim"
 myNoteTaker          = "obsidian"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modm,               xK_n     ), refresh)
     , ((modm,               xK_p     ), spawn myMenu)
-    , ((modm .|. shiftMask, xK_p     ), spawn myBrowser)
-    , ((modm .|. shiftMask, xK_i     ), spawn myTextEditor)
-    , ((modm              , xK_e     ), spawn myFileManager)
-    , ((modm .|. shiftMask, xK_o     ), spawn myNoteTaker)
-    , ((modm .|. shiftMask, xK_c     ), kill)
-    , ((modm,               xK_space ), sendMessage NextLayout)
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    , ((modm,               xK_n     ), refresh)
+    , ((modm,               xK_h     ), sendMessage Shrink)
+    , ((modm,               xK_l     ), sendMessage Expand)
+    , ((modm,               xK_e     ), spawn myFileManager)
     , ((modm,               xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
-    , ((modm,               xK_m     ), windows W.focusMaster  )
     , ((modm,               xK_Return), windows W.swapMaster)
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-    , ((modm,               xK_h     ), sendMessage Shrink)
-    , ((modm,               xK_l     ), sendMessage Expand)
+    , ((modm,               xK_space ), sendMessage NextLayout)
+    , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm,               xK_comma ), sendMessage (IncMasterN 1))
+    , ((modm,               xK_period), sendMessage (IncMasterN (-1)))
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ((modm,               xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+
+    , ((modm .|. shiftMask, xK_c     ), kill)
+    , ((modm .|. shiftMask, xK_p     ), spawn myBrowser)
+    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp)
+    , ((modm .|. shiftMask, xK_o     ), spawn myNoteTaker)
+    , ((modm .|. shiftMask, xK_i     ), spawn myTextEditor)
+    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown)
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+
+    , ((0, xF86XK_AudioMute          ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((0, xF86XK_AudioLowerVolume   ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
+    , ((0, xF86XK_AudioRaiseVolume   ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -58,12 +65,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
+    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
 myLayoutHook = tiled ||| Mirror tiled ||| Full
@@ -92,9 +98,13 @@ myStartupHook = do
     spawnOnce "xset -dpms"
     spawnOnce "setterm -blank 0 -powerdown 0"
     spawnOnce "xset s off"
-    spawnOnce "xmobar"
 
-main = xmonad $ ewmhFullscreen $ ewmh $ defaults
+myBar = "xmobar"
+myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+-- main = xmonad $ ewmhFullscreen $ ewmh $ defaults
 defaults = def {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

@@ -33,6 +33,7 @@
 !.xmonad/**.backup
 !.xmonad/**.hs
 !.xmobarrc
+!.xmobarrc.hs
 
 # OTHER FILES
 !.vimrc
