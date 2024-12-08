@@ -93,6 +93,7 @@ myStartupHook = do
     spawnOnce "picom -f &"
     spawnOnce "amixer set Master playback 100% &"
     spawnOnce "feh --bg-scale /home/shawal/wallpaper.jpg &"
+    spawnOnce "setxkbmap -layout us,ara -option 'grp:alt_shift_toggle'"
     spawnOnce "xmodmap -e \"keycode 66 = Escape\""
     spawnOnce "xmodmap -e \"keycode 9  = Caps_Lock\""
     spawnOnce "xmodmap -e \"clear Lock\""

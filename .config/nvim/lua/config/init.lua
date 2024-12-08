@@ -18,6 +18,11 @@ vim.filetype.add({
     }
 })
 
+vim.filetype.add({
+    extension = {
+    xmobarrc= "hs",
+    },
+})
 -- vim.filetype.add({
 --     extension = {
 --     conf = "bash",
