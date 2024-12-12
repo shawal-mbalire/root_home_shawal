@@ -34,6 +34,7 @@
 !.xmonad/**.hs
 !.xmobarrc
 !.xmobarrc.hs
+!.stalonetrayrc
 
 # OTHER FILES
 !.vimrc

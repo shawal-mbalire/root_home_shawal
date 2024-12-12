@@ -1,4 +1,5 @@
 import XMonad
+import System.IO
 import System.Exit
 import Data.Monoid
 import XMonad.Layout.Spacing
@@ -91,6 +92,10 @@ myLogHook = return ()
 
 myStartupHook = do
     spawnOnce "picom -f &"
+    spawnOnce "xscreensaver &"
+    spawnOnce "stalonetray &"
+    spawnOnce "xscreensaver -no-splash &"
+    spawnOnce "nm-applet --sm-disable"
     spawnOnce "amixer set Master playback 100% &"
     spawnOnce "feh --bg-scale /home/shawal/wallpaper.jpg &"
     spawnOnce "setxkbmap -layout us,ara -option 'grp:alt_shift_toggle'"
