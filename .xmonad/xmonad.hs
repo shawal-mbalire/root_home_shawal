@@ -58,15 +58,39 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioMute          ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     , ((0, xF86XK_AudioLowerVolume   ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((0, xF86XK_AudioRaiseVolume   ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+
+    -- Workspace Navigation
+    , ((modm, xK_1), windows $ W.greedyView "1")
+    , ((modm, xK_2), windows $ W.greedyView "2")
+    , ((modm, xK_3), windows $ W.greedyView "3")
+    , ((modm, xK_4), windows $ W.greedyView "4")
+    , ((modm, xK_5), windows $ W.greedyView "5")
+    , ((modm, xK_6), windows $ W.greedyView "6")
+    , ((modm, xK_7), windows $ W.greedyView "7")
+    , ((modm, xK_8), windows $ W.greedyView "8")
+    , ((modm, xK_9), windows $ W.greedyView "9")
+
+    -- Workspace Shifting
+    , ((modm .|. shiftMask, xK_1), windows $ W.shift "1")
+    , ((modm .|. shiftMask, xK_2), windows $ W.shift "2")
+    , ((modm .|. shiftMask, xK_3), windows $ W.shift "3")
+    , ((modm .|. shiftMask, xK_4), windows $ W.shift "4")
+    , ((modm .|. shiftMask, xK_5), windows $ W.shift "5")
+    , ((modm .|. shiftMask, xK_6), windows $ W.shift "6")
+    , ((modm .|. shiftMask, xK_7), windows $ W.shift "7")
+    , ((modm .|. shiftMask, xK_8), windows $ W.shift "8")
+    , ((modm .|. shiftMask, xK_9), windows $ W.shift "9")
+
+    -- Screen Navigation
+    , ((modm, xK_w), screenWorkspace 0 >>= flip whenJust (windows . W.view))
+    , ((modm, xK_e), screenWorkspace 1 >>= flip whenJust (windows . W.view))
+    , ((modm, xK_r), screenWorkspace 2 >>= flip whenJust (windows . W.view))
+
+    -- Screen Shifting
+    , ((modm .|. shiftMask, xK_w), screenWorkspace 0 >>= flip whenJust (windows . W.shift))
+    , ((modm .|. shiftMask, xK_e), screenWorkspace 1 >>= flip whenJust (windows . W.shift))
+    , ((modm .|. shiftMask, xK_r), screenWorkspace 2 >>= flip whenJust (windows . W.shift))
     ]
-    ++
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
