@@ -92,6 +92,8 @@ myLogHook = return ()
 
 myStartupHook = do
     spawnOnce "picom -f &"
+    spawnOnce "volumeicon &"
+    spawnOnce "blueman-applet &"
     spawnOnce "xscreensaver &"
     spawnOnce "stalonetray &"
     spawnOnce "xscreensaver -no-splash &"
