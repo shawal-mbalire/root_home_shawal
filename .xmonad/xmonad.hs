@@ -23,7 +23,7 @@ myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#00ff00"
 myBrowser            = "google-chrome-stable"
 myMenu               = "rofi -show drun -theme launchers/gridmenu"
-myFileManager        = "nautilus"
+myFileManager        = "nautilus & disown"
 myTextEditor         = "alacritty nvim"
 myNoteTaker          = "obsidian"
 
@@ -115,8 +115,9 @@ myManageHook = composeAll
 myLogHook = return ()
 
 myStartupHook = do
+    spawnOnce "lxpolkit"
     spawnOnce "picom -f &"
-    spawnOnce "volumeicon &"
+    spawnOnce "volumeicon & disown"
     spawnOnce "blueman-applet &"
     spawnOnce "xscreensaver &"
     spawnOnce "stalonetray &"

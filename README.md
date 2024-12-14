@@ -11,6 +11,11 @@ git clone https://github.com/shawal-mbalire/root_home_shawal
 rsync -avhu --progress root_home_shawal ~
 ```
 
+## installing auth agent
+```sh
+sudo dnf install lxpolkit
+```
+
 ## installing nerdfonts
 on arch
 ```sh

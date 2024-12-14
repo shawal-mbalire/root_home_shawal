@@ -1386,9 +1386,6 @@ radio {
       border-color: @insensitive_bg_color_breeze;
       color: @insensitive_fg_color_breeze;
       -gtk-icon-effect: none; }
-  check:indeterminate,
-  radio:indeterminate {
-    -gtk-icon-source: -gtk-recolor(url("../assets/dash-symbolic.svg")); }
   menu menuitem check, menu menuitem radio {
     margin: 0;
     min-height: 14px;
@@ -1402,11 +1399,15 @@ check {
   border-radius: 1.25mm; }
   check:checked {
     -gtk-icon-source: -gtk-recolor(url("../assets/checkmark-symbolic.svg")); }
+  check:indeterminate {
+    -gtk-icon-source: -gtk-recolor(url("../assets/dash-symbolic.svg")); }
 
 radio {
   border-radius: 50%; }
   radio:checked {
     -gtk-icon-source: -gtk-recolor(url("../assets/bullet-symbolic.svg")); }
+  radio:indeterminate {
+    -gtk-icon-source: -gtk-recolor(url("../assets/dash-symbolic.svg")); }
 
 radio:not(:indeterminate):not(:checked):active:not(:backdrop) {
   -gtk-icon-transform: scale(0); }
