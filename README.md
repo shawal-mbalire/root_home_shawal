@@ -16,6 +16,27 @@ rsync -avhu --progress root_home_shawal ~
 sudo dnf install lxpolkit
 ```
 
+## twin gate
+
+### Installation
+
+The following command will download and install the Linux Client on any supported Linux distribution.
+
+```sh
+curl -s https://binaries.twingate.com/client/linux/install.sh | sudo bash
+```
+
+Headless Mode is available for server, services, or container instances.
+
+### Setup
+
+Once installation completes, you need to configure the Linux Client by running the following command:
+
+
+```sh
+sudo twingate setup
+```
+
 ## installing nerdfonts
 on arch
 ```sh
