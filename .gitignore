@@ -24,6 +24,7 @@
 # NEOVIM
 !.config/nvim
 !.config/nvim/**
+.config/nvim/lazy-lock.json
 
 !.config/obsidian
 .config/*
