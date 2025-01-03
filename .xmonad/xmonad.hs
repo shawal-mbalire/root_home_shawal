@@ -2,7 +2,7 @@ import XMonad
 import System.IO
 import System.Exit
 import Data.Monoid
-import XMonad.Layout.Spacing
+-- import XMonad.Layout.Spacing
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
@@ -151,7 +151,8 @@ defaults = def {
         focusedBorderColor = myFocusedBorderColor,
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
-        layoutHook         = spacingWithEdge 5 $ myLayoutHook,
+        -- layoutHook         = spacingWithEdge 5 $ myLayoutHook,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook
