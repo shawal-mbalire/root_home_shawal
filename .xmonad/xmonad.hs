@@ -16,7 +16,7 @@ import qualified Data.Map        as M
 myTerminal           = "alacritty"
 myFocusFollowsMouse  = True
 myClickJustFocuses   = False
-myBorderWidth        = 2
+myBorderWidth        = 0
 myModMask            = mod4Mask
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#dddddd"
