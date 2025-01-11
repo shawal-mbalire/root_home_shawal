@@ -117,10 +117,11 @@ myLogHook = return ()
 myStartupHook = do
     spawnOnce "lxpolkit"
     spawnOnce "picom -f &"
-    spawnOnce "volumeicon & disown"
-    spawnOnce "blueman-applet &"
     spawnOnce "xscreensaver &"
     spawnOnce "stalonetray &"
+    spawnOnce "volumeicon & disown"
+    spawnOnce "blueman-applet &"
+    spawnOnce "flameshot &"
     spawnOnce "xscreensaver -no-splash &"
     spawnOnce "nm-applet --sm-disable"
     spawnOnce "amixer set Master playback 100% &"
