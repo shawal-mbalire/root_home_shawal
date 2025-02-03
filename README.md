@@ -1,4 +1,7 @@
-# My Linux Configuration.
+﻿# My Linux Configuration.
+
+Snaps – obsidian, codeinsiders
+flatpacks – zen, quran companion
 
 
 ## Accepting this configuratoin on a new install
