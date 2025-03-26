@@ -3,12 +3,17 @@
 Snaps – obsidian, codeinsiders
 flatpacks – zen, quran companion
 
-
-## Accepting this configuratoin on a new install
  ## checking file usage
+For linux
  ``` sh
 du --all --human-readable --threshold 1G
 ```
+For Macos
+```sh
+du -h -d 4 | sort -hr | head -30
+```
+
+## Accepting this configuratoin on a new install
 ```sh
 git clone https://github.com/shawal-mbalire/root_home_shawal
 rsync -avhu --progress root_home_shawal ~
