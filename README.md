@@ -1,81 +1,104 @@
-﻿# My Linux Configuration.
+# My Linux Configuration  
 
-Snaps – obsidian, codeinsiders
-flatpacks – zen, quran companion
+## Application Installations  
 
- ## checking file usage
-For linux
- ``` sh
+### Snaps  
+- `obsidian`  
+- `codeinsiders`  
+
+### Flatpaks  
+- `zen`  
+- `quran companion`  
+
+---
+
+## Checking File Usage  
+
+### Linux  
+```sh
 du --all --human-readable --threshold 1G
-```
-For Macos
+```  
+
+### macOS  
 ```sh
 du -h -d 4 | sort -hr | head -30
-```
+```  
 
-## Accepting this configuratoin on a new install
+---
+
+## Accepting This Configuration on a New Install  
 ```sh
 git clone https://github.com/shawal-mbalire/root_home_shawal
 rsync -avhu --progress root_home_shawal ~
-```
+```  
 
-## installing auth agent
+---
+
+## Installing Auth Agent (lxpolkit)  
 ```sh
 sudo dnf install lxpolkit
-```
+```  
 
-## twin gate
+---
 
-### Installation
+## Twingate  
 
-The following command will download and install the Linux Client on any supported Linux distribution.
-
+### Installation  
+Run the following command to install the Twingate Linux Client:  
 ```sh
 curl -s https://binaries.twingate.com/client/linux/install.sh | sudo bash
-```
+```  
+Headless Mode is available for servers, services, or container instances.  
 
-Headless Mode is available for server, services, or container instances.
-
-### Setup
-
-Once installation completes, you need to configure the Linux Client by running the following command:
-
-
+### Setup  
+After installation, configure the client with:  
 ```sh
 sudo twingate setup
-```
+```  
 
-## installing nerdfonts
-on arch
+---
+
+## Installing Nerd Fonts  
+
+### Arch  
 ```sh
 yay -S ttf-hack-nerd
-```
-on fedora
+```  
+
+### Fedora  
 ```sh
 sudo dnf copr enable zawertun/hack-fonts
 sudo dnf install hack-fonts
-```
-install otf-font-awesome on fedora.. don't know when it was installed
+```  
+
+### Installing JetBrainsMono Nerd Font  
 ```sh
 curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
-```
+```  
 
- ## hyprland
+---
 
- ```sh
+## Hyprland Installation  
+```sh
 yay -Syyu hyprland-git wofi drun
-```
+```  
 
-## Nvim packer
+---
+
+## Neovim Configuration  
+
+### Installing Packer  
 ```sh
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
+```  
 
-for fedora
+### Fedora Dependencies  
 ```sh
 sudo dnf install lua lua-devel luarocks go lua5.1
-```
+```  
+
+### Installing Luarocks on Fedora  
 ```fish
 wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
 tar zxpf luarocks-3.11.1.tar.gz
@@ -83,22 +106,20 @@ cd luarocks-3.11.1
 ./configure && make && sudo make install
 sudo luarocks install luasocket
 lua
-```
-on fedora obsidian is a snap
-## Vim plug
+```  
 
-### vim
-```bash
+---
+
+## Vim Plug  
+
+### Vim  
+```sh
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
+```  
 
-### nvim
-```bash
+### Neovim  
+```sh
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
+```  
 
-### waybar bluetooth and nmtui support
-
-install blueman and nmtui
-suprisingly this blueman installs sway controlcenter
-if only there was something like this for hyprland instead of different prgrams
+---
