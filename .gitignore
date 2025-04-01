@@ -52,6 +52,7 @@
 !.gitconfig
 !.gitattributes
 # hosts.yml
+
 # WAYBAR
 !.config/waybar
 !.config/waybar/config.jsonc
