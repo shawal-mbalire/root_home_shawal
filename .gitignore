@@ -11,6 +11,7 @@
 !wallpaper.jpg
 !.config/hypr
 !.config/hypr/hyprland.conf
+!.config/hypr/hyprlock.conf
 !.config/hypr/hyprpaper.conf
 
 # FASTFETCH
