@@ -1,5 +1,6 @@
 *
 *.uuid
+*/.uuid
 !.config
 
 # FISH

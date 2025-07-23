@@ -1,43 +1,112 @@
 {
+    "layer": "top",
+    "position": "top",
+    "height": 35,
     "spacing": 4,
+
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/submap",
-        "hyprland/scratchpad"
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "clock"
     ],
     "modules-right": [
-        "custom/flameshot",
+        "custom/screenshot",
+        "power-profiles-daemon",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
-        "backlight",
-        "battery",
         "bluetooth",
-        "clock",
+        "cpu",
+        "memory",
+        "battery",
         "tray"
     ],
-    "custom/flameshot": {
-        "format": "",  // Standard camera icon
-        "tooltip": false,
-        "on-click": "flameshot gui -r",  // Avoids OS detection issue
-        "on-click-right": "flameshot full -c",
-        "on-click-middle": "env QT_QPA_PLATFORM=xcb flameshot gui"  // X11 fallback
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "sway/mode": {
+        "format": "<span style='italic'>{}</span>"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+    "clock": {
+        "format": " {:%H:%M}",
+        "format-alt": " {:%A, %B %d, %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": true,
+        "on-click": "foot btm"
+    },
+    "memory": {
+        "format": " {}%",
+        "on-click": "foot btm"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": " {ifname}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": " {essid} ({signalStrength}%)",
+        "on-click": "nm-connection-editor"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}%  {icon}",
-        "format-bluetooth-muted": "🔇 ",
-        "format-muted": "🔇",
-        "format-icons": ["🔈", "🔉", "🔊"],
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
         "on-click": "pavucontrol"
     },
-    "css": {
-        "*": {
-            "font-family": "Sans",
-            "font-weight": "bold",
-            "border-radius": 0,
-            "margin": 0
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
         }
+    },
+    "bluetooth": {
+         "format": " {status}",
+         "format-disabled": "",
+         "format-connected": " {device_alias}",
+         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+         "on-click": "blueman-manager"
+    },
+    "custom/screenshot": {
+        "format": "",
+        "on-click": "flameshot gui"
     }
 }
-
