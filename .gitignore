@@ -1,3 +1,6 @@
+# Exclude problematic directories
+.config/user-share/
+.android/
 *
 *.uuid
 */.uuid
