@@ -5,8 +5,8 @@
     "spacing": 4,
 
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode"
+        "hyprland/workspaces",
+        "hyprland/submap"
     ],
     "modules-center": [
         "clock"
@@ -15,22 +15,16 @@
         "custom/screenshot",
         "power-profiles-daemon",
         "pulseaudio",
-        "network",
-        "bluetooth",
-        "cpu",
-        "memory",
         "battery",
         "tray"
     ],
 
-    "sway/workspaces": {
+    "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{name}"
     },
-    "sway/mode": {
-        "format": "<span style='italic'>{}</span>"
-    },
+    
     "tray": {
         "icon-size": 16,
         "spacing": 10
@@ -87,6 +81,8 @@
         },
         "on-click": "pavucontrol"
     },
+    
+    
     "power-profiles-daemon": {
         "format": "{icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -98,15 +94,11 @@
             "power-saver": ""
         }
     },
-    "bluetooth": {
-         "format": " {status}",
-         "format-disabled": "",
-         "format-connected": " {device_alias}",
-         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-         "on-click": "blueman-manager"
-    },
+
     "custom/screenshot": {
         "format": "",
-        "on-click": "flameshot gui"
+        "padding-left": 10,
+        "padding-right": 10,
+        "on-click": "XDG_CURRENT_DESKTOP=Sway flameshot gui"
     }
 }

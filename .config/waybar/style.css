@@ -8,8 +8,8 @@
 
 window#waybar {
     background: transparent;
-    border-bottom: 1px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    border-radius: 10px;
+    color: #ebdbb2;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -34,13 +34,14 @@ window#waybar {
 }
 
 #mode {
-    padding: 0 10px;
-    color: #f9e2af;
+    background: #b8bb26;
+    color: #282828;
+    padding: 5px 10px;
 }
 
 #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #tray, #idle_inhibitor, #power-profiles-daemon, #bluetooth, #custom\/screenshot {
     padding: 0 10px;
-    margin: 0 2px;
+    margin: 0 5px;
 }
 
 #clock {
@@ -96,7 +97,7 @@ window#waybar {
 }
 
 #tray {
-    background-color: #45475a;
+    background-color: transparent;
     padding: 0 10px;
 }
 
@@ -121,5 +122,5 @@ window#waybar {
 }
 
 #custom\/screenshot {
-    color: #cba6f7;
+    color: #d3869b;
 }

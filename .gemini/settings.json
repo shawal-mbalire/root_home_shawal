@@ -1,0 +1,5 @@
+{
+  "theme": "Dracula",
+  "selectedAuthType": "oauth-personal",
+  "default_model": "gemini-2.5-flash"
+}
