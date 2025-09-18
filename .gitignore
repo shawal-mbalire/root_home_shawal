@@ -32,6 +32,10 @@
 !.config/nvim/**
 .config/nvim/lazy-lock.json
 
+# Tmux 
+!.config/tmux 
+!.config/tmux.conf 
+
 !.config/obsidian
 .config/*
 

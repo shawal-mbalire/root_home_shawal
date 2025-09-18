@@ -4,6 +4,7 @@ services:
     container_name: open-webui
     ports:
       - "3000:8080"  # Expose port 8080 internally to 3000 externally
+      - "11434:11434" # Ollama defualt port for continue.dev
     volumes:
       - ollama:/root/.ollama  # Persistent storage for Ollama data
       - open-webui:/app/backend/data  # Persistent storage for app data

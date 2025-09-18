@@ -11,3 +11,4 @@ if status is-interactive
     abbr --add vi 'nvim'
     abbr --add vim 'nvim'
 end
+fish_add_path $HOME/.local/bin
