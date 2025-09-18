@@ -8,3 +8,5 @@ M.general = {
     ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up"},
   }
 }
+
+return M
