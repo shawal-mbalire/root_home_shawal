@@ -1,5 +1,6 @@
 {
-  "theme": "Dracula",
+  "hasSeenIdeIntegrationNudge": true,
   "selectedAuthType": "oauth-personal",
+  "theme": "Dracula",
   "default_model": "gemini-2.5-flash"
 }

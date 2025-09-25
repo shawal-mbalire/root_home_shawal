@@ -14,7 +14,7 @@ configuration {
 	run-shell-command: "{terminal} -e {cmd}";
 	window-command: "wmctrl -i -R {window}";
 	window-match-fields: "title,class,role,name,desktop";
-	icon-theme: "Papirus";
+/*	icon-theme: "Papirus";*/
 	drun-match-fields: "name,generic,exec,categories,keywords";
 	drun-categories: "";
 	drun-show-actions: false;
