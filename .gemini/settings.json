@@ -1,6 +1,14 @@
 {
-  "hasSeenIdeIntegrationNudge": true,
-  "selectedAuthType": "oauth-personal",
-  "theme": "Dracula",
+  "ide": {
+    "hasSeenNudge": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Dracula"
+  },
   "default_model": "gemini-2.5-flash"
 }

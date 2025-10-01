@@ -1,6 +1,6 @@
 if status is-interactive
 
-    set -g -x GTK_THEME 'BreezeDark'
+    set -g -x GTK_THEME BreezeDark
 
     set fish_greeting ''
     fastfetch
@@ -8,7 +8,8 @@ if status is-interactive
     set fish_cursor_default block
     set fish_cursor_visual block
 
-    abbr --add vi 'nvim'
-    abbr --add vim 'nvim'
+    abbr --add vi nvim
+    abbr --add vim nvim
 end
 fish_add_path $HOME/.local/bin
+# eval "$(/opt/homebrew/bin/brew shellenv)"
