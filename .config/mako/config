@@ -1,0 +1,18 @@
+# Basic Mako configuration
+# See `man 5 mako` for a full list of options
+
+font=sans-serif 10
+padding=5
+border-size=1
+border-radius=5
+
+# Colors
+background-color=#282828
+text-color=#ebdbb2
+border-color=#928374
+
+# Default timeout
+timeout=5000
+
+# Position
+# anchor=top-right
