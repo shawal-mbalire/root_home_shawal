@@ -134,3 +134,4 @@
 # qute browser
 !.config/qutebrowser
 !.config/qutebrowser/config.py
+.local/share/fonts/**/*.uuid
