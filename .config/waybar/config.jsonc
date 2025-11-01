@@ -13,6 +13,7 @@
     ],
     "modules-right": [
         "custom/screenshot",
+        "custom/temp",
         "power-profiles-daemon",
         "pulseaudio",
         "backlight",
@@ -115,5 +116,10 @@
         "padding-left": 10,
         "padding-right": 10,
         "on-click": "XDG_CURRENT_DESKTOP=Sway flameshot gui"
+    },
+
+    "custom/temp": {
+        "format": "🌡️",
+        "on-click": "~/.config/waybar/toggle_temp.sh"
     }
 }
