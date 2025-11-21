@@ -7,6 +7,7 @@ cp -r root_home_shawal/.git/ .git/
 git pull
 rm -rf root_home_shawal
 ```
+
 ```sh
 sudo dnf install lua lua-devel luarocks go lua5.1
 sudo dnf install fish alacritty rofi blueman pavucontrol waybar gh google-chrome nm-applet
@@ -30,6 +31,7 @@ sudo dnf install nautilus
 ```
 
 ## Rawhide
+
 changing to raw hide gives you a more rolling release distro giving you the latest fixes and patches
 
 ```sh
@@ -77,6 +79,7 @@ sudo dnf group rmove libreoffice
 ```
 
 ## Google chrome
+
 ```sh
 echo " [google-chrome]
     1 name=google-chrome
@@ -92,3 +95,46 @@ sudo dnf remove firefox**
 sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
 printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
 ```
+
+  Enabling the Hyprland Polkit Authentication Agent on Fedora (systemd Method)
+
+  This guide explains how to install and configure the hyprpolkitagent for Hyprland on Fedora using its
+  systemd service. This agent provides a graphical password prompt for applications that require
+  administrative privileges.
+
+  1. Enable the COPR Repository
+
+  This project is available in the solopasha/hypr COPR repository. Enable it with the following command:
+
+   1 sudo dnf copr enable solopasha/hypr
+
+  2. Install the Package
+
+  Install the hyprpolkitagent package using dnf:
+
+   1 sudo dnf install hyprpolkitagent
+
+  3. Enable the systemd Service
+
+  To start the agent and ensure it launches automatically every time you log in, enable the systemd user
+  service:
+
+   1 systemctl --user enable --now hyprpolkitagent.service
+
+  This command both enables the service to start on future logins and starts it immediately for your current
+  session.
+
+  Important Note on sudo
+
+  You may have noticed that the systemctl command above does not use sudo. This is intentional and very
+  important.
+
+* User vs. System Services: The --user flag tells systemd to manage services for your specific user
+     account, not for the entire system. These services run with your user's permissions and are stored in
+     your user's home directory.
+* Why `sudo` Breaks Things: When you run sudo systemctl --user ..., you are telling the system to run the
+     command as the root user. As a result, it looks for services belonging to root, not your user. You will
+     fail to see or interact with your own user services and may get a "service not found" error or other
+     unexpected behavior.
+
+  Always run systemctl with the --user flag as your regular user, without sudo.
