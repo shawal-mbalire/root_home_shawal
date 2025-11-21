@@ -1,0 +1,7 @@
+# ~/.config/yazi/theme.toml
+[flavor]
+dark = "catppuccin-mocha"
+light = "catppuccin-latte"
+
+# For syntax highlighting
+syntect_theme = "/Users/shawalmbalire/.config/yazi/catppuccin-mocha.tmTheme"
