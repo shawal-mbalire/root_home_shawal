@@ -4,4 +4,4 @@ dark = "catppuccin-mocha"
 light = "catppuccin-latte"
 
 # For syntax highlighting
-syntect_theme = "/Users/shawalmbalire/.config/yazi/catppuccin-mocha.tmTheme"
+syntect_theme = "/home/shawal/.config/yazi/catppuccin-mocha.tmTheme"

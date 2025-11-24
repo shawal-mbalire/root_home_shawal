@@ -1,0 +1,4 @@
+[opener]
+editor = [
+  { run = 'nvim "$@"', block = true }
+]
