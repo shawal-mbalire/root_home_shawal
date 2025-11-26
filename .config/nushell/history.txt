@@ -1,0 +1,32 @@
+ls
+ls -la
+config
+config nu
+ls
+clear
+dnf remove nano
+sudo dnf remove nano
+$EDITOR
+env.EDITOR
+cat env.EDITOR
+cat $EDITOR
+cat $env.EDITOR
+which nvim
+exit
+ks
+pwd
+cd .config
+ls | grep nu
+cd nushell
+vim .
+nvim .
+config nu
+opencode
+source config.nu
+config nu
+source config.nu
+config nu
+source config.nu
+la
+ll
+git add .
