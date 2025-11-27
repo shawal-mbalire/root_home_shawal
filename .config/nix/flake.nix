@@ -10,31 +10,32 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, ... }:
   let
-    configuration = { pkgs, config, ... }: {
-
+    # Shared configuration (platform-agnostic)
+    commonConfig = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ pkgs.neovim
-          pkgs.mkalias
-          pkgs.obsidian
-          pkgs.kitty
-          pkgs.tmux
-          pkgs.fish
-          pkgs.opencode
-          # pkgs.vlc
-          pkgs.carapace
-          pkgs.eza
-        ];
-
-      fonts.packages =  [
-        pkgs.comfortaa
+      
+      environment.systemPackages = with pkgs; [
+        neovim mkalias obsidian kitty tmux fish opencode
+        carapace eza
       ];
-
-      system.primaryUser = "shawalmbalire";
+      
+      fonts.packages = [ pkgs.comfortaa ];
       programs.fish.enable = true;
+      
+      nix.settings.experimental-features = "nix-command flakes";
+    };
+
+    # macOS-specific configuration
+    darwinConfig = { pkgs, config, ... }: {
+      imports = [ commonConfig ];
+      
+      nixpkgs.hostPlatform = "aarch64-darwin";
+      system.primaryUser = "shawalmbalire";
       users.users.shawalmbalire.shell = pkgs.fish;
+      
+      system.configurationRevision = self.rev or self.dirtyRev or null;
+      system.stateVersion = 6;
+      
       homebrew = {
           brews = [
             "mas"
@@ -48,47 +49,45 @@
             };
           onActivation.cleanup = "zap";
         };
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
+    };
 
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-
+    # Linux-specific configuration  
+    nixosConfig = { pkgs, config, ... }: {
+      imports = [ commonConfig ];
+      
+      nixpkgs.hostPlatform = "x86_64-linux";
+      
+      # Add VLC from nixpkgs for Linux
+      environment.systemPackages = with pkgs; [ vlc ];
+      
+      users.users.shawalmbalire = {
+        isNormalUser = true;
+        shell = pkgs.fish;
+        extraGroups = [ "wheel" ];
+      };
+      
+      system.stateVersion = "23.11";
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."macmini" = nix-darwin.lib.darwinSystem {
       modules = [
-        configuration 
+        darwinConfig 
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
-            # Install Homebrew under the default prefix
             enable = true;
-
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
             enableRosetta = true;
-
-            # User owning the Homebrew prefix
             user = "shawalmbalire";
-
-            # Automatically migrate existing Homebrew installations
             autoMigrate = true;
           };
         }
       ];
+    };
+    
+    nixosConfigurations."fedora" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ nixosConfig ];
     };
   };
 }
