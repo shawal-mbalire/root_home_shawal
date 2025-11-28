@@ -11,11 +11,10 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, ... }:
   let
-    configuration = { pkgs, config, ... }: {
+    # Defines configuration common to all systems (macOS and Fedora).
+    generalConfiguration = { pkgs, config, lib, ... }: {
 
-      nixpkgs.config.allowUnfree = true;
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+
       environment.systemPackages =
         [ pkgs.neovim
           pkgs.mkalias
@@ -39,63 +38,69 @@
       ];
 
       system.primaryUser = "shawalmbalire";
-      homebrew = {
-          brews = [
-            "mas"
-          ];
-          enable = true;
-          casks = [
-            "visual-studio-code@insiders"
-            "vlc"
-          ];
-          masApps = {
-            };
-          onActivation.cleanup = "zap";
-        };
-      # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
+    };
 
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 6;
-
-       # The platform the configuration will be used on.
-       nixpkgs.hostPlatform = "aarch64-darwin";
-
-
-
-      users.users.shawalmbalire = {
-        home = "/Users/shawalmbalire";
+    # Defines configurations specific to Fedora systems.
+    fedoraConfiguration = { pkgs, config, lib, ... }:
+      generalConfiguration { inherit pkgs config lib; } // {
+        # Fedora-specific settings go here
+        nixpkgs.hostPlatform = "x86_64-linux";
+        programs.fish.enable = true; # Assuming fish should be enabled on Fedora too
+        users.users.shawalmbalire = {
+          home = "/home/shawalmbalire"; # Standard Linux home directory
+          shell = pkgs.fish;
+        };
+        # TODO: Add other Fedora-specific configurations here (e.g., boot.loader, networking, services for Linux)
       };
-
-     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
+    nixosConfigurations."fedora" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      nixpkgs.config.allowUnfree = true; # Allow unfree packages for this system
+      modules = [
+        fedoraConfiguration
+        # Add other NixOS modules here if needed
+      ];
+    };
+
     darwinConfigurations."macmini" = nix-darwin.lib.darwinSystem {
       modules = [
-        configuration 
+        { nixpkgs.config.allowUnfree = true; } # Allow unfree packages for this system
+        ({ pkgs, config, lib, ... }:
+          generalConfiguration { inherit pkgs config lib; } // { # Overlay macOS-specific settings
+            system.primaryUser = "shawalmbalire";
+            homebrew = {
+                brews = [
+                  "mas"
+                ];
+                enable = true;
+                casks = [
+                  "visual-studio-code@insiders"
+                  "vlc"
+                ];
+                masApps = {
+                  };
+                onActivation.cleanup = "zap";
+              };
+            programs.fish.enable = true;
+            system.configurationRevision = self.rev or self.dirtyRev or null;
+            # Backward compatibility state version.
+            system.stateVersion = 6;
+            # The platform the configuration will be used on.
+            nixpkgs.hostPlatform = "aarch64-darwin";
+            users.users.shawalmbalire = {
+              home = "/Users/shawalmbalire";
+              shell = pkgs.fish;
+            };
+          }
+        )
         nix-homebrew.darwinModules.nix-homebrew
-
         {
           nix-homebrew = {
-            # Install Homebrew under the default prefix
             enable = true;
-
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
-
-            # User owning the Homebrew prefix
+            enableRosetta = true; # Enable Rosetta for Intel Homebrew on Apple Silicon
             user = "shawalmbalire";
-
-            # Automatically migrate existing Homebrew installations
             autoMigrate = true;
           };
         }
