@@ -89,6 +89,8 @@
                 masApps = {
                   };
                 onActivation.cleanup = "zap";
+                onActivation.autoUpdate = true;
+                onActivation.upgrade = true;
               };
             programs.fish.enable = true;
 
