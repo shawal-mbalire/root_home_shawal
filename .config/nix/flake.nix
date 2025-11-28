@@ -32,6 +32,8 @@
           pkgs.hello
           pkgs.nodejs_24
           pkgs.zoxide
+          pkgs.bun
+          pkgs.gh
         ];
 
       fonts.packages =  [
@@ -82,12 +84,34 @@
                   # "opencode"
                   "vlc"
                   "zen"
+                  "freecad"
                 ];
                 masApps = {
                   };
                 onActivation.cleanup = "zap";
               };
             programs.fish.enable = true;
+
+            system.defaults = {
+              dock = {
+                autohide = true;
+                orientation = "left";
+                persistent-apps = [
+                  { app = "/Applications/Visual Studio Code - Insiders.app"; }
+                  { app = "/Applications/Zen.app"; }
+                ];
+              };
+              NSGlobalDomain.AppleICUForce24HourTime = true;
+              NSGlobalDomain.AppleShowAllExtensions = true;
+              loginwindow.GuestEnabled = false;
+              finder.FXPreferredViewStyle = "clmv";
+              finder.FXRemoveOldTrashItems = true;
+            };
+            system.keyboard = {
+              enableKeyMapping = true;
+              remapCapsLockToControl = false;
+              remapCapsLockToEscape = true;
+            };
             system.configurationRevision = self.rev or self.dirtyRev or null;
             # Backward compatibility state version.
             system.stateVersion = 6;
