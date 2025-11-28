@@ -81,6 +81,7 @@
                   # "gemini-cli"
                   # "opencode"
                   "vlc"
+                  "zen"
                 ];
                 masApps = {
                   };
