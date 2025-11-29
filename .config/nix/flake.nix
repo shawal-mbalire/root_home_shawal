@@ -19,6 +19,10 @@
         [ pkgs.neovim
           pkgs.mkalias
           pkgs.gemini-cli
+          pkgs.cargo
+          pkgs.uv
+          pkgs.ruff
+          pkgs.ty
           pkgs.obsidian
           pkgs.kitty
           pkgs.tmux
