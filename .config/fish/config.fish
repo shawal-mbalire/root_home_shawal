@@ -25,10 +25,10 @@ if status is-interactive
     abbr --add gitl 'git log --oneline'
     abbr --add gitp 'git push'
     abbr --add gitpl 'git pull'
-    alias ls='exa --long --header --icons --git'
-    alias la='exa -la --header --icons --git'
-    alias ll='exa -la --header --icons --git'
-    carapace init fish | source
+    # alias ls='exa --long --header --icons --git'
+    # alias la='exa -la --header --icons --git'
+    # alias ll='exa -la --header --icons --git'
+    # carapace init fish | source
 
     # Pure prompt color overrides for dark background
     set -g pure_color_primary blue
@@ -37,7 +37,17 @@ if status is-interactive
     set -g pure_color_success green
     set -g pure_color_danger red
     set -g pure_color_warning yellow
+    # Set Neovim as the default text editor for command-line applications
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
 end
 
 fish_add_path $HOME/.local/bin
 fish_add_path /Users/shawalmbalire/.antigravity/antigravity/bin
+
+# opencode
+fish_add_path /home/shawal/.opencode/bin
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

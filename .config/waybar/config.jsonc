@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "top",
     "height": 35,
-    "spacing": 4,
+    "spacing": 12,
 
     "modules-left": [
         "hyprland/workspaces",
@@ -24,14 +24,7 @@
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "default": ""
-        }
+        "format": "{name}"
     },
     
     "tray": {
@@ -39,17 +32,17 @@
         "spacing": 10
     },
     "clock": {
-        "format": "<span></span> {:%H:%M}",
+        "format": "<span>󰥔</span> {:%H:%M}",
         "format-alt": " {:%A, %B %d, %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
-        "format": "<span></span> {usage}%",
+        "format": "<span>󰘚</span> {usage}%",
         "tooltip": true,
         "on-click": "foot btm"
     },
     "memory": {
-        "format": "<span></span> {}%",
+        "format": "<span>󰍛</span> {}%",
         "on-click": "foot btm"
     },
     "battery": {
@@ -59,10 +52,10 @@
             "critical": 15
         },
         "format": "{capacity}% <span>{icon}</span>",
-        "format-charging": "{capacity}% <span></span>",
-        "format-plugged": "{capacity}% <span></span>",
+        "format-charging": "{capacity}% <span>󰂄</span>",
+        "format-plugged": "{capacity}% <span>󰚥</span>",
         "format-alt": "{time} <span>{icon}</span>",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "network": {
         "format-wifi": "<span></span>  {signalStrength}%",
@@ -77,8 +70,8 @@
         "format-bluetooth": "{volume}% <span>{icon}</span> {format_source}",
         "format-bluetooth-muted": "<span> {icon}</span> {format_source}",
         "format-muted": "<span></span> {format_source}",
-        "format-source": "{volume}% <span></span>",
-        "format-source-muted": "<span></span>",
+        "format-source": "<span>󰍬</span> {volume}%",
+        "format-source-muted": "<span>󰍭</span>",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -86,14 +79,14 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol"
     },
     "backlight": {
         "device": "intel_backlight",
         "format": "{percent}% <span>{icon}</span>",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠", "󰃡", "󰃢"],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-"
     },
@@ -108,18 +101,19 @@
             "performance": "",
             "balanced": "",
             "power-saver": ""
-        }
+        },
+        "on-click": "~/.config/waybar/cycle-power-profile.sh"
     },
 
     "custom/screenshot": {
-        "format": "",
+        "format": "󰄄",
         "padding-left": 10,
         "padding-right": 10,
-        "on-click": "XDG_CURRENT_DESKTOP=Sway flameshot gui"
+        "on-click": "hyprshot -m region"
     },
 
     "custom/temp": {
-        "format": "🌡️",
+        "format": "󰔏",
         "on-click": "~/.config/waybar/toggle_temp.sh"
     }
 }

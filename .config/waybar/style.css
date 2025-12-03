@@ -15,7 +15,6 @@ window#waybar {
     padding: 5px 10px;
     color: #ffffff;
     border-radius: 3px;
-    margin: 3px;
     transition: all 0.3s ease;
     font-size: 28px;
 }
@@ -36,9 +35,8 @@ window#waybar {
     padding: 5px 10px;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #tray, #idle_inhibitor, #power-profiles-daemon, #bluetooth, #custom\/screenshot {
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #tray, #idle_inhibitor, #power-profiles-daemon, #bluetooth, #custom\/screenshot, #custom\/temp {
     padding: 0 10px;
-    margin: 0 5px;
 }
 
 

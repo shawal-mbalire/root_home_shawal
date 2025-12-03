@@ -2,5 +2,5 @@
 if pgrep -x "gammastep" > /dev/null; then
     pkill gammastep
 else
-    gammastep -O 10000 &
+    gammastep -O 16000 &
 fi

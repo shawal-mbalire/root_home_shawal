@@ -10,8 +10,8 @@ rm -rf root_home_shawal
 
 ```sh
 sudo dnf install lua lua-devel luarocks go lua5.1
-sudo dnf install hyprland hyprland-devel hyprlock hypridle 
-sudo dnf install fish kitty rofi blueman pavucontrol waybar gh google-chrome nm-applet
+sudo dnf install hyprland hyprland-devel hyprlock hypridle hyprpolkitagent hyprpaper
+sudo dnf install fish kitty rofi blueman pavucontrol waybar gh google-chrome nm-applet faltpak
 sudo dnf install exa gammastep
 ```
 
