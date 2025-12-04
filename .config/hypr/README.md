@@ -5,6 +5,7 @@ This Hyprland config is structured like a 12-factor app for portability and main
 ## Setup
 1. Install dependencies from `dependencies.txt` (includes hyprpolkitagent for polkit authentication).
 2. Ensure Hyprland is configured to use `~/.config/hypr/hyprland.conf`.
+3. Check `portability.md` for distro/hardware-specific tweaks.
 
 ## Structure
 - `hyprland.conf`: Main config with variable definitions and sources.
@@ -19,6 +20,7 @@ This Hyprland config is structured like a 12-factor app for portability and main
 - `hyprpaper.conf`: Wallpaper.
 - `hyprland-laptop.conf`: Example variant for laptop environment.
 - `scripts/toggle_waybar.sh`: Script to toggle waybar on/off (used in keybindings).
+- `portability.md`: Guide for adapting to different distros/hardware.
 
 ## Workflow
 ### Build (Edit)
