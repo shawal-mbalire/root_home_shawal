@@ -14,10 +14,34 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Add LazyVim to RTP and init to ensure globals are available for extras
+local lazyvim_path = vim.fn.stdpath("data") .. "/lazy/LazyVim"
+if vim.uv.fs_stat(lazyvim_path) then
+  vim.opt.rtp:prepend(lazyvim_path)
+  _G.LazyVim = require("lazyvim.util")
+  
+  -- Add support for the LazyFile event
+  local Event = require("lazy.core.handler.event")
+  Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+  Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+end
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+vim.g.lazyvim_check_order = false
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "LazyVim/LazyVim",
+      priority = 10000,
+      lazy = false,
+      opts = {},
+      init = function()
+        require("lazyvim.config").init()
+      end,
+    },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -30,7 +54,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "catpuccin" } },
+  install = { colorscheme = { "catppuccin" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
@@ -40,9 +64,9 @@ require("lazy").setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
