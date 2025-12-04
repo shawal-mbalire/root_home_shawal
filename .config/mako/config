@@ -16,3 +16,17 @@ timeout=5000
 
 # Position
 # anchor=top-right
+
+[urgency=low]
+default-timeout=2000
+
+[urgency=normal]
+default-timeout=5000
+
+[urgency=high]
+default-timeout=10000
+
+[urgency=critical]
+default-timeout=0
+border-size=2
+border-color=#fb4934
