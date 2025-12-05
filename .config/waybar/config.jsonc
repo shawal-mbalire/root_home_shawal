@@ -14,6 +14,7 @@
     "modules-right": [
         "custom/screenshot",
         "custom/temp",
+        "custom/tlp",
         "power-profiles-daemon",
         "pulseaudio",
         "backlight",
@@ -115,5 +116,12 @@
     "custom/temp": {
         "format": "󰔏",
         "on-click": "~/.config/waybar/toggle_temp.sh"
+    },
+
+    "custom/tlp": {
+        "exec": "systemctl is-enabled tlp",
+        "format": "TLP: {}",
+        "interval": 30
     }
+}
 }
