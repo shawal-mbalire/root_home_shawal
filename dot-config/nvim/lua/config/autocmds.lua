@@ -44,3 +44,15 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
     vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.INFO)
   end,
 })
+
+-- Show dashboard when opening nvim in a directory
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = group,
+  callback = function()
+    if vim.fn.argc(-1) == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      local buf = vim.api.nvim_get_current_buf()
+      vim.api.nvim_buf_delete(buf, { force = true })
+      require("snacks").dashboard()
+    end
+  end,
+})

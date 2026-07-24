@@ -2,14 +2,10 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
-      picker = {
-        sources = {
-          explorer = {
-            hidden = true, -- Shows hidden files by default
-            ignored = true, -- Uncomment to also show files ignored by .gitignore
-          },
-        },
-      },
+      explorer = { enabled = false, replace_netrw = false },
+    },
+    keys = {
+      { "<leader>e", function() require("mini.files").open(vim.uv.cwd(), true) end, desc = "MiniFiles (cwd)" },
     },
   },
 }
