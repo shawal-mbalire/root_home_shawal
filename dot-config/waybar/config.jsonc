@@ -15,7 +15,7 @@
     "custom/temp",
     "network",
     "power-profiles-daemon",
-    "pulseaudio",
+    "custom/audio-device",
     "backlight",
     "battery",
     "tray"
@@ -80,28 +80,6 @@
     "format-alt": "<span></span> {essid} ({signalStrength}%)",
     "on-click": "nm-connection-editor"
   },
-  "pulseaudio": {
-    "format": "{volume}% <span>{icon}</span>",
-    "format-bluetooth": "{volume}% <span>{icon}</span>",
-    "format-bluetooth-muted": "<span> {icon}</span>",
-    "format-muted": "<span></span>",
-    "format-source": "<span>󰍬</span> {volume}%",
-    "format-source-muted": "<span>󰍭</span>",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": [
-        "󰕿",
-        "󰖀",
-        "󰕾"
-      ]
-    },
-    "on-click": "pavucontrol"
-  },
   "backlight": {
     "device": "intel_backlight",
     "format": "{percent}% <span>{icon}</span>",
@@ -137,5 +115,14 @@
   "custom/temp": {
     "format": "󰔏",
     "on-click": "~/.config/waybar/toggle_temp.sh"
+  },
+  "custom/audio-device": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/select-audio-device.sh info",
+    "interval": 5,
+    "on-click": "~/.config/waybar/select-audio-device.sh select",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "tooltip": false
   }
 }

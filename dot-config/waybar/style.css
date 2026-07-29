@@ -253,3 +253,7 @@ window#waybar {
 #custom-temp {
     color: @pink;
 }
+
+#custom-audio-device {
+    color: @sapphire;
+}
