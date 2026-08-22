@@ -77,9 +77,9 @@ bind(v.mainMod, "mouse:272", hl.dsp.window.drag(), { mouse = true })
 bind(v.mainMod, "mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Volume (laptop multimedia keys)
-bind("", "XF86AudioRaiseVolume", exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true, locked = true })
-bind("", "XF86AudioLowerVolume", exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true, locked = true })
-bind("", "XF86AudioMute", exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+bind("", "XF86AudioRaiseVolume", exec_cmd("~/.config/waybar/scripts/volume-control.sh up"), { repeating = true, locked = true })
+bind("", "XF86AudioLowerVolume", exec_cmd("~/.config/waybar/scripts/volume-control.sh down"), { repeating = true, locked = true })
+bind("", "XF86AudioMute", exec_cmd("~/.config/waybar/scripts/volume-control.sh mute"), { locked = true })
 bind("", "XF86AudioMicMute", exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 
 -- Brightness

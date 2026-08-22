@@ -36,7 +36,7 @@ case "$ACTION" in
             exit 1
         fi
 
-        CHOSEN=$(echo -e "$SINKS" | rofi -dmenu -p "Choose Audio" -i -theme "$HOME/.config/rofi/themes/audio-selector.rasi" 2>/dev/null)
+        CHOSEN=$(echo -e "$SINKS" | rofi -dmenu -p "Choose Audio" -i -theme "$HOME/.config/rofi/themes/waybar-menu.rasi" 2>/dev/null)
 
         if [ -n "$CHOSEN" ]; then
             CHOSEN_CLEAN=$(echo "$CHOSEN" | sed 's/  ✓$//')
@@ -75,5 +75,9 @@ case "$ACTION" in
         fi
 
         echo "{\"text\":\"$ICON $VOL\",\"tooltip\":\"$DESC\"}"
+        ;;
+    *)
+        echo "Usage: $0 {select|info}" >&2
+        exit 1
         ;;
 esac

@@ -145,6 +145,7 @@ window#waybar {
 
 #battery {
     color: @green;
+    min-width: 3em;
 }
 
 #battery.charging,
@@ -179,10 +180,12 @@ window#waybar {
 
 #backlight {
     color: @yellow;
+    min-width: 3em;
 }
 
 #network {
     color: @lavender;
+    min-width: 6em;
 }
 
 #network.disconnected {
@@ -223,6 +226,7 @@ window#waybar {
 
 #power-profiles-daemon {
     color: @yellow;
+    min-width: 2em;
 }
 
 #power-profiles-daemon.performance {
@@ -239,6 +243,7 @@ window#waybar {
 
 #bluetooth {
     color: @blue;
+    min-width: 5em;
 }
 
 #bluetooth.disabled,
@@ -248,12 +253,15 @@ window#waybar {
 
 #custom-screenshot {
     color: @maroon;
+    min-width: 2em;
 }
 
 #custom-temp {
     color: @pink;
+    min-width: 2em;
 }
 
 #custom-audio-device {
     color: @sapphire;
+    min-width: 5em;
 }
