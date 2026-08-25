@@ -55,7 +55,7 @@ if status is-interactive
     alias ssh='kitty +kitten ssh'
     alias ls='eza --icons'
     alias ll='eza -lh --icons'
-    alias la='eza -a --icons'
+    alias la='eza -la --icons'
 
     # Prompt Configuration (12-Factor: Config)
     # Pure prompt colors - override via environment if needed
