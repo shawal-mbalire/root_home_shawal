@@ -1,9 +1,9 @@
 [credential "https://github.com"]
 
-    helper = !/usr/bin/gh auth git-credential
+    helper = !gh auth git-credential
 [credential "https://gist.github.com"]
     helper =
-    helper = !/usr/bin/gh auth git-credential
+    helper = !gh auth git-credential
 [user]
     name = shawal-mbalire
     email = mbalireshawal@gmail.com
@@ -14,7 +14,7 @@
 	lowSpeedTime = 999999
 [init]
 	defaultBranch = main
-[credential]
-	helper = !gh auth git-credential
 [core]
 	editor = nvim
+[credential]
+	helper = !gh auth git-credential
