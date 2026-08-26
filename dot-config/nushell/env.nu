@@ -103,6 +103,7 @@ path add ($env.HOME | path join ".turso")
 path add ($env.HOME | path join ".local/share/mise/shims")
 path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".flutter/bin")
+path add ($end.HOME | path join "./google-cloud-sdk/bin"
 
 
 # To load from a custom file you can use:
