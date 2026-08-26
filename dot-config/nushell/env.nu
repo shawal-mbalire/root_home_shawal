@@ -37,7 +37,6 @@ def create_right_prompt [] {
 
 # Use nushell functions to define your right and left prompt
 $env.PROMPT_COMMAND = {|| create_left_prompt }
-# FIXME: This default is not implemented in rust code as of 2023-09-08.
 $env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
@@ -103,7 +102,7 @@ path add ($env.HOME | path join ".turso")
 path add ($env.HOME | path join ".local/share/mise/shims")
 path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".flutter/bin")
-path add ($end.HOME | path join "./google-cloud-sdk/bin"
+path add ($env.HOME | path join "./google-cloud-sdk/bin")
 
 
 # To load from a custom file you can use:
