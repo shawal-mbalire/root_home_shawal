@@ -1,0 +1,44 @@
+name: tuicr
+description: A code review TUI with vim keybindings
+flags:
+  -r, --revisions=: Commit range / revset to review
+  --theme=: Color theme to use
+  --appearance=: Appearance mode (light/dark/system)
+  -p, --path=: Filter diff to a specific file or directory
+  -w, --working-tree: Include uncommitted changes
+  --file=: Open a file or directory for annotation
+  -A, --all-files: Review every tracked file in the cwd's git repo
+  --stdout: Output to stdout instead of clipboard when exporting
+  --no-update-check: Skip checking for updates on startup
+  --repo-url=: Override the GitHub repo for PR operations
+  -h, --help: Print help
+  -V, --version: Print version
+completion:
+  flag:
+    appearance: ["light", "dark", "system"]
+    path: ["$files"]
+    file: ["$files"]
+commands:
+  - name: pr
+    aliases: ["mr"]
+    description: Review a GitHub pull request or GitLab merge request
+    completion:
+      positional:
+        - ["$files"] # You could map this to a custom PR fetcher if you write a macro later
+
+  - name: tui
+    description: Open the interactive TUI
+    commands:
+      - name: pr
+        aliases: ["mr"]
+        description: Review a GitHub pull request or GitLab merge request in the TUI
+
+  - name: review
+    description: Inspect or update persisted review sessions
+    commands:
+      - name: list
+        description: List persisted review sessions for a checkout or forge repo
+      - name: add
+        description: Add a local draft comment to a persisted session
+      - name: comments
+        description: Print comments stored in a persisted session
