@@ -1,4 +1,5 @@
 dot-config/gh/
+dot-config/nushell/history.txt
 
 # Ignore UUID files and icons
 **/.uuid
