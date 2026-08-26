@@ -3,3 +3,6 @@ stow:
 
 macos: stow
   ./setup-macos.sh
+
+fedora: stow
+  ./setup-fedora.sh

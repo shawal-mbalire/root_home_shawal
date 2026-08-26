@@ -712,7 +712,6 @@ source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
 source ~/.local/share/atuin/init.nu
 use ~/.cache/starship/init.nu
-use ~/.cache/mise/init.nu
 
 
 $env.DIRENV_LOG_FORMAT = ""
