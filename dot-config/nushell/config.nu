@@ -664,13 +664,13 @@ def --env cx [arg] {
     ls -l
 }
 
-alias l = ls --all
+alias la = ls --all
 alias c = clear
 alias ll = ls -l
 alias lt = eza --tree --level=2 --long --icons --git
-alias v = nvim
-alias as = aerospace
-alias asr = atuin scripts run
+alias vim = nvim
+# alias as = aerospace
+# alias asr = atuin scripts run
 alias oc = opencode 
 
 def ff [] {
