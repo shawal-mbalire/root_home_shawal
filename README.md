@@ -2,7 +2,25 @@
 
 ## Install dot files
 
+Uses GNU Stow to symlink configs. Run from repo root:
+```sh
+stow --dotfiles .
+```
+
+### macOS
+```sh
+just macos
+```
+
+### Fedora
+```sh
+just fedora
+```
+
 tmux now bootstraps TPM and installs declared plugins automatically on first load, using `~/.config/tmux/plugins`.
+
+### Git Config
+Git configuration follows XDG convention at `~/.config/git/config` (moved from `~/.gitconfig`).
 ## Application Installations  
 
 ### Snaps  
