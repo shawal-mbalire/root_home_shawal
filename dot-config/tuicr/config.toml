@@ -1,0 +1,29 @@
+theme = "catppuccin-mocha"
+diff_view = "unified"         # or "side-by-side"
+ignore_whitespace = false     # ignore all whitespace in local VCS diffs
+appearance = "dark"           # or "system" / "light"
+mouse = false
+leader = " "                  # configurable prefix for leader shortcuts
+comment_vim = false           # vim modal editing in the review comment box
+relative_line_numbers = false # show rendered-row distances in the diff gutter
+scroll_offset = 5             # lines visible above/below cursor (like scrolloff)
+show_pr_checks = true         # show CI check rollups in PR reviews
+transparent_background = true # let terminal background show through
+username = "shawal"           # display name on local comments
+single_file_view = true       # start in focused single-file mode
+
+# Conventional Comments: https://conventionalcomments.org
+# Test auto-reload
+comment_types = [
+  { id = "praise", definition = "highlight something positive", color = "green" },
+  { id = "nitpick", definition = "trivial preference-based requests", color = "#d19a66" },
+  { id = "suggestion", definition = "propose improvements to the current subject" },
+  { id = "issue", definition = "highlight specific problems with the subject under review", color = "red" },
+  { id = "question", definition = "potential concern, seeking clarification or investigation", color = "yellow" },
+  { id = "thought", definition = "idea that popped up from reviewing, non-blocking" },
+  { id = "note", definition = "highlight something the reader should take note of" },
+  { id = "todo", definition = "small, trivial, but necessary changes" },
+  { id = "typo", definition = "misspelling or typo" },
+  { id = "polish", definition = "nothing wrong, but ways to immediately improve quality" },
+  { id = "quibble", definition = "like nitpick, but less evocative" },
+]
