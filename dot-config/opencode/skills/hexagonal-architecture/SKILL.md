@@ -36,7 +36,7 @@ mkdir -p infra adapters tests/unit tests/integration tests/e2e tests/fixtures/fa
 touch domain/__init__.py domain/models/__init__.py domain/errors/__init__.py
 touch domain/ports/__init__.py domain/workflows/__init__.py
 touch infra/__init__.py adapters/__init__.py tests/__init__.py
-touch main.py
+touch main.py  # Rename to api.py, worker.py, engine.py, cli.py based on project role
 ```
 
 ### Justfile
@@ -48,9 +48,9 @@ touch main.py
 default:
     @just --list
 
-# Run the application
+# Run the application (entry point matches project role)
 run:
-    uv run python main.py
+    uv run python main.py  # or api.py, worker.py, engine.py, cli.py
 
 # Watch logs (platform-specific)
 logs *args:
@@ -673,17 +673,47 @@ domain/
 
 ### 2. Infrastructure (Cross-Cutting Concerns)
 
-Separate folder for logging, config, caching, and other infrastructure. Never in domain.
+**Single project:** `infra/` folder inside the project.
+
+**Multi-project workspace:** Root-level `infra/` that all projects share. Contains only plumbing (config, env loading). Logging, presentation, and other I/O are adapters of their respective ports.
 
 ```
-infra/
-├── logging.py    # LoggerPort implementation (Console, Sentry, JSON)
-├── config.py     # Environment loading, secrets management
-├── caching.py    # CachePort implementation (Redis, IndexedDB, in-memory)
-├── metrics.py    # MetricsPort implementation (Prometheus, Datadog)
-├── events.py     # EventPublisherPort implementation (Kafka, RabbitMQ, MQTT)
-└── auth.py       # JWT decode, token validation (rules stay in domain)
+workspace/
+├── infra/                    # Root-level shared infra (plumbing only)
+│   ├── __init__.py
+│   └── config.py             # Environment loading, settings, secrets
+├── shared/                   # Shared domain + adapters
+│   ├── domain/
+│   │   ├── models/
+│   │   ├── ports/
+│   │   ├── errors.py
+│   │   └── workflows/
+│   └── adapters/
+│       ├── backtest/         # Shared backtest adapters
+│       ├── csv/              # CSV data adapters
+│       ├── patterns/         # Pattern detectors
+│       ├── deriv.py          # Deriv WebSocket client
+│       ├── mt5/              # MT5 adapters
+│       ├── presentation.py   # Rich output (adapter of presentation concerns)
+│       └── rich_logger.py    # Logger adapter (implements LoggerPort)
+├── project_a/                # Strategy/project A
+│   ├── domain/               # Project-specific domain
+│   ├── adapters/             # Project-specific adapters
+│   ├── main.py
+│   └── tests/
+└── project_b/                # Strategy/project B
+    ├── domain/
+    ├── adapters/
+    ├── main.py
+    └── tests/
 ```
+
+**Rules for root infra/:**
+- Contains ONLY config/settings plumbing (pydantic-settings, env loading)
+- Logging → adapter in `shared/adapters/` (implements `LoggerPort`)
+- Presentation/output → adapter in `shared/adapters/` (not infra)
+- Caching, metrics, events → adapters in `shared/adapters/` if shared, or project-local `adapters/`
+- Never put business logic, ports, or models in infra
 
 ### 3. Adapters (Outer Ring)
 
@@ -2226,10 +2256,11 @@ def test_create_multiple_documents(client):
 3. **Mocking is Universal** — All platforms use Interfaces for Ports, enabling pure in-memory Mocks in any language
 4. **Infrastructure Stays Separate** — Logging, config, caching go in `infra/`, never in domain
 5. **Error Handling in Domain** — Business rule errors are domain exceptions; infrastructure errors are adapter concerns
-6. **Composition Root is the Only Place** — Only `main.py` or equivalent reads env vars and creates concrete instances
+6. **Composition Root is the Only Place** — Only the entry point (`main.py`, `api.py`, `engine.py`, etc.) reads env vars and creates concrete instances
 7. **Fixtures Enable Reuse** — Shared test data, factories, and fakes live in `tests/fixtures/`, not scattered across tests
 8. **uv for Python** — Use `uv init --no-package` for script-based projects, `uv add` for dependencies
 9. **justfile for Commands** — Use `just` to manage project tasks (run, test, lint, format, typecheck)
+10. **Nested Hexagons Don't Import Each Other** — Bounded contexts communicate via ports/adapters, never direct imports
 
 ## When to Use
 
@@ -2238,6 +2269,7 @@ def test_create_multiple_documents(client):
 - Systems where testability and maintainability are priorities
 - Projects where you may swap infrastructure (databases, APIs, frameworks)
 - Multi-platform apps sharing domain logic across backend/frontend/mobile/embedded
+- **Nested hexagon** — when 3+ bounded contexts exist with independent data models, teams, or evolution rates
 
 ## Decision Checklist
 
@@ -2251,8 +2283,43 @@ Building a new feature?
 ├─ Create tests/fixtures/ with factories, builders, and fakes
 ├─ Write unit tests with Fake Adapters using shared fixtures
 ├─ Write integration tests for real Adapters
-└─ Wire everything in Main/Composition Root
+├─ Wire everything in the entry point (main.py | api.py | worker.py | engine.py | cli.py)
+
+Multiple bounded contexts?
+├─ Use nested hexagonal architecture
+├─ Create domain/shared/ for cross-context models only
+├─ Each context gets its own models/, ports/, workflows/, errors/
+├─ Contexts communicate via ports/adapters, never direct imports
+├─ Adapters organized by context: adapters/<context>/
+└─ Tests organized by context: tests/unit/<context>/
 ```
+
+## Entry Point Naming
+
+The composition root (`main.py`) can be renamed based on project role:
+
+| Project Type | Entry Point | Justfile `run` Command |
+|---|---|---|
+| API/Web | `api.py` | `uv run uvicorn api:app` |
+| Worker/Background | `worker.py` | `uv run python worker.py` |
+| CLI | `cli.py` | `uv run python cli.py` |
+| Engine/Core | `engine.py` | `uv run python engine.py` |
+| Scheduler | `scheduler.py` | `uv run python scheduler.py` |
+| CLI with args | `app.py` | `uv run python app.py` |
+
+Update `justfile` and `pyproject.toml` to match the chosen entry point:
+
+```just
+# Example: worker project
+run:
+    uv run python worker.py
+
+# Example: API project
+run:
+    uv run uvicorn api:app --reload --host 0.0.0.0 --port 8000
+```
+
+All references to the entry point in justfiles, tests, and imports must use the chosen name.
 
 ## Directory Structure
 
@@ -2276,7 +2343,7 @@ project/
 │   ├── unit/
 │   ├── integration/
 │   └── e2e/
-├── main.py
+├── <entry_point>.py    # main.py | api.py | worker.py | engine.py | cli.py
 ├── pyproject.toml
 ├── justfile
 └── uv.lock
@@ -2309,8 +2376,170 @@ project/
 │   ├── unit/
 │   ├── integration/
 │   └── e2e/
-├── main.py
+├── <entry_point>.py    # main.py | api.py | worker.py | engine.py | cli.py
 ├── pyproject.toml
 ├── justfile
 └── uv.lock
+```
+
+## Nested Hexagonal Architecture (Extremely Large Projects)
+
+For large systems with **multiple bounded contexts** (e.g., `billing`, `inventory`, `users`), apply hexagonal architecture **recursively** — each bounded context is its own hexagon inside the outer hexagon.
+
+### When to Use
+
+- 3+ bounded contexts with independent data models
+- Different teams own different contexts
+- Contexts evolve at different rates
+- Each context may have its own persistence, API, or messaging
+
+### Nested Structure
+
+```
+project/
+├── domain/
+│   ├── shared/                      # Shared kernel (cross-context models, ports)
+│   │   ├── models/
+│   │   │   ├── money.py
+│   │   │   └── audit.py
+│   │   ├── ports/
+│   │   │   ├── event_bus.py
+│   │   │   └── clock.py
+│   │   └── errors.py
+│   ├── billing/                     # Bounded context #1
+│   │   ├── models/
+│   │   │   ├── invoice.py
+│   │   │   └── payment.py
+│   │   ├── ports/
+│   │   │   ├── payment_gateway.py
+│   │   │   ├── invoice_repository.py
+│   │   │   └── billing_event_publisher.py
+│   │   ├── errors.py
+│   │   └── workflows/
+│   │       ├── create_invoice.py
+│   │       └── process_payment.py
+│   ├── inventory/                   # Bounded context #2
+│   │   ├── models/
+│   │   │   ├── product.py
+│   │   │   └── stock.py
+│   │   ├── ports/
+│   │   │   ├── stock_repository.py
+│   │   │   └── inventory_event_publisher.py
+│   │   ├── errors.py
+│   │   └── workflows/
+│   │       ├── reserve_stock.py
+│   │       └── restock.py
+│   └── users/                       # Bounded context #3
+│       ├── models/
+│       │   └── user.py
+│       ├── ports/
+│       │   ├── user_repository.py
+│       │   └── auth_provider.py
+│       ├── errors.py
+│       └── workflows/
+│           ├── authenticate.py
+│           └── register_user.py
+├── infra/
+│   ├── config.py
+│   └── logging.py
+├── adapters/
+│   ├── billing/
+│   │   ├── stripe_adapter.py
+│   │   └── invoice_sql_adapter.py
+│   ├── inventory/
+│   │   ├── product_sql_adapter.py
+│   │   └── redis_stock_cache.py
+│   └── users/
+│       ├── firebase_auth_adapter.py
+│       └── user_firestore_adapter.py
+├── tests/
+│   ├── unit/
+│   │   ├── billing/
+│   │   ├── inventory/
+│   │   └── users/
+│   ├── integration/
+│   │   ├── billing/
+│   │   ├── inventory/
+│   │   └── users/
+│   └── e2e/
+│       └── test_checkout_flow.py    # Cross-context E2E
+├── api.py
+├── worker.py
+├── pyproject.toml
+├── justfile
+└── uv.lock
+```
+
+### Rules for Nested Hexagons
+
+1. **Shared kernel is small** — Only truly cross-cutting models (`Money`, `AuditStamp`, `EventBus` port) go in `domain/shared/`. Keep it minimal.
+2. **Contexts cannot import each other directly** — If billing needs user info, define a port in billing (`UserLookupPort`) and implement an adapter that queries users context. Never `from domain.users import User` inside billing.
+3. **Cross-context communication via ports** — Use `EventBus` port for async, or define explicit port+adapter for sync queries.
+4. **Each context has its own ports/adapters** — `adapters/billing/` only implements `domain/billing/ports/`.
+5. **Workflows are context-scoped** — `billing/workflows/` only imports from `billing/models/`, `billing/ports/`, and `domain/shared/`.
+6. **Entry point wires contexts together** — The composition root creates adapters and maps ports to implementations for all contexts.
+
+### Cross-Context Interaction Pattern
+
+```python
+# domain/billing/ports/user_lookup.py (billing defines what it needs)
+from typing import Protocol
+from domain.shared.models.money import Money
+
+class UserLookupPort(Protocol):
+    def get_user_credit_limit(self, user_id: str) -> Money: ...
+
+# adapters/billing/user_lookup_adapter.py (adapter bridges contexts)
+from domain.billing.ports.user_lookup import UserLookupPort
+from domain.users.workflows.get_user import get_user
+from domain.shared.models.money import Money
+
+class UserLookupAdapter(UserLookupPort):
+    def __init__(self, user_repository):
+        self._user_repo = user_repository
+
+    def get_user_credit_limit(self, user_id: str) -> Money:
+        user = get_user(user_id, self._user_repo)
+        return user.credit_limit
+```
+
+### Justfile for Nested Projects
+
+```just
+# justfile
+
+default:
+    @just --list
+
+run:
+    uv run python api.py
+
+test:
+    uv run pytest tests/ -v
+
+test-unit:
+    uv run pytest tests/unit/ -v
+
+test-billing:
+    uv run pytest tests/unit/billing/ tests/integration/billing/ -v
+
+test-inventory:
+    uv run pytest tests/unit/inventory/ tests/integration/inventory/ -v
+
+test-users:
+    uv run pytest tests/unit/users/ tests/integration/users/ -v
+
+test-e2e:
+    uv run pytest tests/e2e/ -v
+
+lint:
+    uv run ruff check .
+
+format:
+    uv run ruff format .
+
+typecheck:
+    uv run pyright
+
+check: lint typecheck test
 ```
